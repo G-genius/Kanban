@@ -1,0 +1,21 @@
+.container {
+    position: relative;
+    max-width: 1920px;
+}
+
+.box {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo {
+    width: 100px;
+}
+
+.case {
+    flex-grow: 1;
+    padding: 1px;
+    width: max-content;
+}

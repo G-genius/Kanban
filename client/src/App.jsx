@@ -15,12 +15,12 @@ function App() {
     <div>
       <BrowserRouter>
           <Routes>
-              <Route path="/" element={<AuthLayout/>}></Route>
-              <Route path="signIn" element={<SignIn/>}></Route>
-              <Route path="signUp" element={<SignUp/>}></Route>
-          </Routes>
-          <Routes>
-              <Route path='/' element={<AppLayout />}>
+              <Route path="/" element={<AuthLayout/>}>
+                <Route path="signIn" element={<SignIn/>}></Route>
+                <Route path="signUp" element={<SignUp/>}>
+              </Route>
+              </Route>
+              <Route path='/' element={<Home />}>
                   <Route index element={<Home />} />
                   <Route path='boards' element={<Home />} />
                   <Route path='boards/:boardId' element={<Board />} />
