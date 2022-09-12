@@ -1,4 +1,9 @@
+body {
+    background-color: black;
+}
+
 .container {
+    margin-top: 40px;
     position: relative;
     max-width: 1920px;
 }
@@ -19,3 +24,33 @@
     padding: 1px;
     width: max-content;
 }
+.form {
+   display: inline-grid;
+}
+input {
+    height: 25px;
+    margin-top: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+
+
+.reg, .log, .no_akk {
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    margin-top: 10px;
+}
+
+.reg {
+    margin-left: 40px;
+}
+
+.reg_up {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+

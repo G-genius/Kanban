@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom'
 import authUtils from '../../utils/authUtils';
-import logo from '../../assets/images/logo-light.png';
+import logo from '../../assets/images/logo-dark.png';
 import '../../css/style.css';
 
 const AuthLayout = () => {
