@@ -12,14 +12,7 @@ const SignIn = () => {
             <form className='form'>
                 <input type="text" id='username' name='username' required disabled={loading} placeholder='Введите логин'/>
                 <input type="password" id='password' name='password' required disabled={loading} placeholder='Введите пароль'/>
-                <div className="buttons">
-                <button className="log">
-                    Войти
-                </button>
-                <button className="reg">
-                    Зарегистрироваться
-                </button>
-                </div>
+                <button className="log">Войти </button>
                 <Link to='/SignUp'><button className='no_akk'>Нет аккаунта? Зарегестрируйтесь</button></Link>
 
             </form>
