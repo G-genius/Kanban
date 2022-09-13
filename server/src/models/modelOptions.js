@@ -1,9 +1,9 @@
 exports.schemaOptions = {
-    toJson: {
-        virtuals: true
+    toJSON: {
+      virtuals: true
     },
     toObject: {
-        virtuals: true
+      virtuals: true
     },
-    timeStamp: true
-}
+    timestamp: true
+  }

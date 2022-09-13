@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require('../models/user').default
 const CryptoJs = require('crypto-js')
 const jsonwebtoken = require('jsonwebtoken')
 
