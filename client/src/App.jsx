@@ -4,7 +4,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AuthLayout from "./components/layout/AuthLayout";
-import SignIn from "./pages/SignIn";
+import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import AppLayout from "./components/layout/AppLayout";
@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
           <Routes>
               <Route path="/" element={<AuthLayout/>}>
-                <Route path="signIn" element={<SignIn/>}></Route>
+                <Route path="login" element={<Login/>}/>
                 <Route path="signUp" element={<SignUp/>}>
               </Route>
               </Route>
