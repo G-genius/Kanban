@@ -11,6 +11,7 @@ const Sidebar = () => {
     // Получаем user name пользователя
     const user = useSelector((state) => state.user.value)
 
+    // Выйти из аккаунта
     const exitBtn = () => {
         localStorage.removeItem("token")
         navigate("/login")
