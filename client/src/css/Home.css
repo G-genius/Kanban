@@ -1,0 +1,17 @@
+.home {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.create-board-btn {
+    background: #000000;
+    color: #E900FF;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.create-board-btn:hover {
+    background: #FFC600;
+    color: #000000;
+}

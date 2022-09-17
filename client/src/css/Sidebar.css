@@ -1,0 +1,20 @@
+.side-bar {
+    background: #000000;
+    width: 300px;
+    min-height: 100vh;
+}
+
+.user {
+    margin-top: 20px;
+}
+
+.user-name {
+    color: #FFC600;
+    padding: 10px;
+}
+
+.exit-btn {
+    margin-left: 30px;
+    color: #E900FF;
+    cursor: pointer;
+}
