@@ -26,19 +26,19 @@ const Signup = () => {
 
         if (username === '') {
             err = true
-            setUsernameErrText('Please fill this field')
+            setUsernameErrText('Пожалуйста, заполните это поле')
         }
         if (password === '') {
             err = true
-            setPasswordErrText('Please fill this field')
+            setPasswordErrText('Пожалуйста, заполните это поле')
         }
         if (confirmPassword === '') {
             err = true
-            setConfirmPasswordErrText('Please fill this field')
+            setConfirmPasswordErrText('Пожалуйста, заполните это поле')
         }
         if (password !== confirmPassword) {
             err = true
-            setConfirmPasswordErrText('Confirm password not match')
+            setConfirmPasswordErrText('Пароли не совпадают')
         }
 
         if (err) return
@@ -113,7 +113,7 @@ const Signup = () => {
                     color='success'
                     type='submit'
                 >
-                    Signup
+                    Регистрация
                 </LoadingButton>
             </Box>
             <Button
@@ -121,7 +121,7 @@ const Signup = () => {
                 to='/login'
                 sx={{ textTransform: 'none' }}
             >
-                Already have an account? Login
+                У вас уже есть учетная запись? Авторизоваться
             </Button>
         </>
     )

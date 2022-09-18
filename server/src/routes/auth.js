@@ -7,19 +7,19 @@ const User = require('../models/user')
 
 router.post(
     '/signup',
-    body('username').isLength({ min: 8 }).withMessage(
-        'username must be at least 8 characters'
+    body('username').isLength({ min: 5 }).withMessage(
+        'имя пользователя должно состоять не менее чем из 5 символов'
     ),
     body('password').isLength({ min: 8 }).withMessage(
-        'password must be at least 8 characters'
+        'пароль должен состоять не менее чем из 8 символов'
     ),
     body('confirmPassword').isLength({ min: 8 }).withMessage(
-        'confirmPassword must be at least 8 characters'
+        'пароль для подтверждения должен состоять не менее чем из 8 символов'
     ),
     body('username').custom(value => {
         return User.findOne({ username: value }).then(user => {
             if (user) {
-                return Promise.reject('username already used')
+                return Promise.reject('имя пользователя уже использовальзуется')
             }
         })
     }),
@@ -29,11 +29,11 @@ router.post(
 
 router.post(
     '/login',
-    body('username').isLength({ min: 8 }).withMessage(
-        'username must be at least 8 characters'
+    body('username').isLength({ min: 5 }).withMessage(
+        'имя пользователя должно состоять не менее чем из 5 символов'
     ),
     body('password').isLength({ min: 8 }).withMessage(
-        'password must be at least 8 characters'
+        'пароль должен состоять не менее чем из 8 символов'
     ),
     validation.validate,
     userController.login

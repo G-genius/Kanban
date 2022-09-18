@@ -27,7 +27,7 @@ const AuthLayout = () => {
                     alignItems: 'center',
                     flexDirection: 'column'
                 }}>
-                    <img src={assets.images.logoDark} style={{ width: '100px' }} alt='app logo' />
+                    <img src={assets.images.logolight} style={{ width: '100px' }} alt='app logo' />
                     <Outlet />
                 </Box>
             </Container>

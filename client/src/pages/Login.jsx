@@ -84,7 +84,7 @@ const Login = () => {
                     color='success'
                     type='submit'
                 >
-                    Login
+                    Войти
                 </LoadingButton>
             </Box>
             <Button
@@ -92,7 +92,7 @@ const Login = () => {
                 to='/signup'
                 sx={{ textTransform: 'none' }}
             >
-                Don't have an account? Signup
+                У вас нет учетной записи? Зарегистрироваться
             </Button>
         </>
     )
