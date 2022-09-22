@@ -8,7 +8,7 @@ const taskSchema = new Schema({
         ref: 'Section',
         required: true
     },
-    author: {
+    /*author: {
         type: String,
         default: ''
     },
@@ -47,7 +47,15 @@ const taskSchema = new Schema({
     plan: {
         type: Boolean,
         default: ''
-    },
+    },*/
+    title: {
+        type: String,
+        default: ''
+      },
+      content: {
+        type: String,
+        default: ''
+      },
     position: {
         type: Number
     }

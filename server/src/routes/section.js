@@ -4,6 +4,18 @@ const sectionController = require('../controllers/section')
 const validation = require('../handlers/validation')
 const {param} = require("express-validator");
 
+router.post(
+    '/',
+    param('boardId').custom(value => {
+      if (!validation.isObjectId(value)) {
+        return Promise.reject('invalid id')
+      } else return Promise.resolve()
+    }),
+    validation.validate,
+    tokenHandler.verifyToken,
+    sectionController.create
+  )
+
 router.put(
     '/:sectionId',
     param('sectionId').custom(value => {

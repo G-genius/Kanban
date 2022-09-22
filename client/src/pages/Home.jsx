@@ -1,14 +1,36 @@
-import React from 'react'
-import "../css/Home.css"
+import React from 'react';
+import "../css/Home.css";
+import { useDispatch } from 'react-redux';
+import { setBoards } from '../redux/features/boardSlice';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import boardApi from '../api/boardApi';
+import { Box } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const Home = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch() 
+    const [loading, setLoading] = useState(false)
 
-    const Edit = () => {
-
+    //Функция создания карточки
+    const createBoard = async () => {
+        setLoading(true)
+        try{
+            const res = await boardApi.create()
+            dispatch(setBoards([res]))
+            navigate(`/boards/${res.id}`)
+        }
+        catch(err) {
+            alert(err)
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     return (
-        <div className="home">
+       /* <div className="home">
             <div className="scroll-bar">
                 <div className="board">
                     <p className="title">На паузе</p>
@@ -26,7 +48,7 @@ const Home = () => {
                         </div>
                         <div>
                             <a className="board-text"><input type="checkbox" className="board-title"/> Срочно</a>
-                            <button className="edit-btn" onClick={Edit}>Редактировать</button>
+                            <button className="edit-btn" onClick={CreateBoard} loading={loading}>Редактировать</button>
                         </div>
                     </div>
                 </div>
@@ -51,7 +73,22 @@ const Home = () => {
 
                 </div>
             </div>
-        </div>
+        </div>*/
+        <Box sx={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <LoadingButton
+              variant='outlined'
+              color='success'
+              onClick={createBoard}
+              loading={loading}
+            >
+              Click here to create your first board
+            </LoadingButton>
+          </Box>
     )
 }
 export default Home
