@@ -32,6 +32,7 @@ const Sidebar = () => {
         getBoards()
     }, [dispatch])
 
+
     useEffect(() => {
         const activeItem = boards.findIndex(e => e.id === boardId)
         if (boards.length > 0 && boardId === undefined) {

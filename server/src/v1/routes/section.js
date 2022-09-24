@@ -3,6 +3,7 @@ const { param } = require('express-validator')
 const tokenHandler = require('../handlers/tokenHandler')
 const sectionController = require('../controllers/section')
 const validation = require('../handlers/validation')
+const boardController = require("../controllers/board");
 
 router.post(
   '/',
@@ -31,6 +32,12 @@ router.put(
   validation.validate,
   tokenHandler.verifyToken,
   sectionController.update
+)
+
+router.get(
+    '/',
+    tokenHandler.verifyToken,
+    sectionController.getAll
 )
 
 router.delete(

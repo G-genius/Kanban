@@ -6,6 +6,7 @@ const sectionApi = {
         `boards/${boardId}/sections/${sectionId}`,
         params
     ),
+    getAll: () => axiosClient.get('sections'),
     delete: (boardId, sectionId) => axiosClient.delete(`boards/${boardId}/sections/${sectionId}`)
 }
 

@@ -12,6 +12,15 @@ exports.create = async (req, res) => {
   }
 }
 
+exports.getAll = async (req, res) => {
+  try {
+    const sections = await Section.find({ user: req.user._id }).sort('-position')
+    res.status(200).json(sections)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 exports.update = async (req, res) => {
   const { sectionId } = req.params
   try {

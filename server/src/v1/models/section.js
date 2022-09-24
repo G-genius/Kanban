@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 const { schemaOptions } = require('./modelOptions')
 
 const sectionSchema = new Schema({
+
   title: {
     type: String,
     default: ''

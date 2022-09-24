@@ -1,39 +1,63 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "../css/Home.css";
-import { useDispatch } from 'react-redux';
-import { setBoards } from '../redux/features/boardSlice';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import boardApi from '../api/boardApi';
-import { Box } from "@mui/material";
-import LoadingButton from '@mui/lab/LoadingButton';
+import {useState} from "react";
+import sectionApi from '../api/sectionApi'
+import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setBoards} from "../redux/features/boardSlice";
+import {setSection} from "../redux/features/sectionSlice";
 
 const Home = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch() 
-    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const section = useSelector((state) => state.section.value)
 
-    //Функция создания карточки
-    const createBoard = async () => {
-        setLoading(true)
-        try{
-            const res = await boardApi.create()
-            dispatch(setBoards([res]))
-            navigate(`/boards/${res.id}`)
+    useEffect(() => {
+        const getSection = async () => {
+            try {
+                const res = await sectionApi.getAll()
+                dispatch(setSection(res))
+            } catch (err) {
+                alert(err)
+            }
         }
-        catch(err) {
-            alert(err)
-        }
-        finally {
-            setLoading(false)
+        getSection()
+    }, [dispatch])
+
+    let firstTitle = ''
+    let secondTitle = ''
+    let thirdTitle = ''
+    let fourthTitle = ''
+    let fifthTitle = ''
+    let sixthTitle = ''
+
+    async function getTitle() {
+        for (let i = 0; i < section.length; i++){
+            if(i == 0) {
+                firstTitle = section[0].title
+            }
+            if(i == 1) {
+                secondTitle = section[1].title
+            }
+            if(i == 2){
+                thirdTitle = section[2].title
+            }
+            if(i == 3){
+                fourthTitle = section[3].title
+            }
+            if(i == 4){
+                fifthTitle = section[4].title
+            }
+            if(i == 5){
+                sixthTitle = section[5].title
+            }
         }
     }
-
+    getTitle()
     return (
         <div className="home">
             <div className="scroll-bar">
                 <div className="board">
-                    <p className="title">На паузе</p>
+                    <p className="title">{firstTitle}</p>
                     <div className="board-section">
                         <a className="board-title">Автор: <a className="board-text">{}</a></a>
                         <a className="board-title">Дата создания: <a className="board-text">{}</a></a>
@@ -52,23 +76,23 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="board">
-                    <p className="title">Вырезать</p>
+                    <p className="title">{secondTitle}</p>
 
                 </div>
                 <div className="board">
-                    <p className="title">Вырезан</p>
+                    <p className="title">{thirdTitle}</p>
 
                 </div>
                 <div className="board">
-                    <p className="title">Доставлен в МрК</p>
+                    <p className="title">{fourthTitle}</p>
 
                 </div>
                 <div className="board">
-                    <p className="title">Отправлен клиенту</p>
+                    <p className="title">{fifthTitle}</p>
 
                 </div>
                 <div className="board">
-                    <p className="title">Рассмотрен клиентом</p>
+                    <p className="title">{sixthTitle}</p>
 
                 </div>
             </div>
