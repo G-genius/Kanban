@@ -30,7 +30,7 @@ const Home = () => {
     }
 
     return (
-       /* <div className="home">
+        <div className="home">
             <div className="scroll-bar">
                 <div className="board">
                     <p className="title">На паузе</p>
@@ -48,7 +48,6 @@ const Home = () => {
                         </div>
                         <div>
                             <a className="board-text"><input type="checkbox" className="board-title"/> Срочно</a>
-                            <button className="edit-btn" onClick={CreateBoard} loading={loading}>Редактировать</button>
                         </div>
                     </div>
                 </div>
@@ -73,22 +72,7 @@ const Home = () => {
 
                 </div>
             </div>
-        </div>*/
-        <Box sx={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <LoadingButton
-              variant='outlined'
-              color='success'
-              onClick={createBoard}
-              loading={loading}
-            >
-              Click here to create your first board
-            </LoadingButton>
-          </Box>
+        </div>
     )
 }
 export default Home

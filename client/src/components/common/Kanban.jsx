@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-/*import sectionApi from '../../api/sectionApi'
-import taskApi from '../../api/taskApi'
-import TaskModal from './TaskModal'*/
+import sectionApi from '../../api/sectionApi'
+
 
 let timer
 const timeout = 500
@@ -57,22 +56,22 @@ const Kanban = props => {
   }
 
   const createSection = async () => {
-   /* try {
+   try {
       const section = await sectionApi.create(boardId)
       setData([...data, section])
     } catch (err) {
       alert(err)
-    }*/
+    }
   }
 
   const deleteSection = async (sectionId) => {
-   /* try {
+    try {
       await sectionApi.delete(boardId, sectionId)
       const newData = [...data].filter(e => e.id !== sectionId)
       setData(newData)
     } catch (err) {
       alert(err)
-    }*/
+    }
   }
 
   const updateSectionTitle = async (e, sectionId) => {
@@ -83,11 +82,11 @@ const Kanban = props => {
     newData[index].title = newTitle
     setData(newData)
     timer = setTimeout(async () => {
-    /*  try {
+     try {
         await sectionApi.update(boardId, sectionId, { title: newTitle })
       } catch (err) {
         alert(err)
-      }*/
+      }
     }, timeout);
   }
 
