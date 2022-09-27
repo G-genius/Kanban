@@ -25,7 +25,7 @@ router.post(
 router.get(
     '/',
     tokenHandler.verifyToken,
-    sectionController.getAll
+    taskController.getAll
 )
 
 router.put(

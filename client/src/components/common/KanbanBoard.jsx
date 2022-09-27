@@ -1,11 +1,42 @@
-import '../../css/KanbanBoard.css';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+//import './kanban.scss'
+import { DragDropContext, Draggable } from 'react-beautiful-dnd'
+import { Droppable } from 'react-beautiful-dnd';
 import mockData from '../../moskData'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import Card from './Card'
+import {useDispatch, useSelector} from "react-redux";
+import taskApi from "../../api/taskApi";
+import {setTask} from "../../redux/features/taskSlice";
 
-const KanbanBoard = () => {
-  const [data, setData] = useState(mockData)
+const Kanban = () => {
+    const [data, setData] = useState(mockData)
+    const dispatch = useDispatch()
+    const task = useSelector((state) => state.task.value)
+    console.log(task[0])
+
+    let firstTitle = ''
+
+    async function getTitle() {
+        for (let i = 0; i < task.length; i++){
+            if(i == 0) {
+                firstTitle = task[0].title
+            }
+        }
+    }
+    getTitle()
+
+
+    useEffect(() => {
+        const getTask = async () => {
+            try {
+                const res = await taskApi.getAll()
+                dispatch(setTask(res))
+            } catch (err) {
+                alert(err)
+            }
+        }
+        getTask()
+    }, [dispatch])
 
     const onDragEnd = result => {
         if (!result.destination) return
@@ -38,7 +69,7 @@ const KanbanBoard = () => {
                     data.map(section => (
                         <Droppable
                             key={section.id}
-                            droppableId={section.id}
+                            droppableId={section.id.toString()}
                         >
                             {(provided) => (
                                 <div
@@ -54,7 +85,7 @@ const KanbanBoard = () => {
                                             section.tasks.map((task, index) => (
                                                 <Draggable
                                                     key={task.id}
-                                                    draggableId={task.id}
+                                                    draggableId={task.id.toString()}
                                                     index={index}
                                                 >
                                                     {(provided, snapshot) => (
@@ -68,7 +99,7 @@ const KanbanBoard = () => {
                                                             }}
                                                         >
                                                             <Card>
-                                                                {task.title}
+                                                                {firstTitle}
                                                             </Card>
                                                         </div>
                                                     )}
@@ -87,4 +118,4 @@ const KanbanBoard = () => {
     )
 }
 
-export default KanbanBoard
+export default Kanban
