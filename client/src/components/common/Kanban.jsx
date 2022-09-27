@@ -55,23 +55,53 @@ const Kanban = props => {
     getId()
     console.log(sectionId)
 
-    // const createTask = async (sectionId) => {
-    //     try {
-    //         const task = await taskApi.create(boardId, { sectionId })
-    //         //const newData = [...data]
-    //         //const index = newData.findIndex(e => e.id === sectionId)
-    //         //newData[index].tasks.unshift(task)
-    //         setData([...data, task])
-    //     } catch (err) {
-    //         alert(err)
-    //     }
-    //     console.log(sectionId)
-    // }
+      const onUpdateTask = (task) => {
+    const newData = [...data]
+    const sectionIndex = newData.findIndex(e => e.id === task.section.id)
+    const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
+    newData[sectionIndex].tasks[taskIndex] = task
+    setData(newData)
+  }
 
-
+    const onDragEnd = async ({ source, destination }) => {
+        if (!destination) return
+        const sourceColIndex = data.findIndex(e => e.id === source.droppableId)
+        const destinationColIndex = data.findIndex(e => e.id === destination.droppableId)
+        const sourceCol = data[sourceColIndex]
+        const destinationCol = data[destinationColIndex]
+    
+        const sourceSectionId = sourceCol.id
+        const destinationSectionId = destinationCol.id
+    
+        const sourceTasks = [...sourceCol.tasks]
+        const destinationTasks = [...destinationCol.tasks]
+    
+        if (source.droppableId !== destination.droppableId) {
+          const [removed] = sourceTasks.splice(source.index, 1)
+          destinationTasks.splice(destination.index, 0, removed)
+          data[sourceColIndex].tasks = sourceTasks
+          data[destinationColIndex].tasks = destinationTasks
+        } else {
+          const [removed] = destinationTasks.splice(source.index, 1)
+          destinationTasks.splice(destination.index, 0, removed)
+          data[destinationColIndex].tasks = destinationTasks
+        }
+    
+        try {
+          await taskApi.updatePosition(boardId, {
+            resourceList: sourceTasks,
+            destinationList: destinationTasks,
+            resourceSectionId: sourceSectionId,
+            destinationSectionId: destinationSectionId
+          })
+          setData(data)
+        } catch (err) {
+          alert(err)
+        }
+      }
     return (
         <div>
-
+            <DragDropContext onDragEnd={onDragEnd}></DragDropContext>
             <Home/>
         </div>
     )

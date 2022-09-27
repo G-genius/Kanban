@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
+import KanbanBoard from '../components/common/KanbanBoard';
 import "../css/Home.css";
-import {useState} from "react";
+/*import {useState} from "react";
 import sectionApi from '../api/sectionApi'
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setBoards} from "../redux/features/boardSlice";
 import {setSection} from "../redux/features/sectionSlice";
-
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import Board from './Board'*/
 const Home = () => {
-    const dispatch = useDispatch()
+/*    const dispatch = useDispatch()
     const section = useSelector((state) => state.section.value)
 
     useEffect(() => {
@@ -52,10 +54,14 @@ const Home = () => {
             }
         }
     }
-    getTitle()
+    getTitle()*/
     return (
-        <div className="home">
-            <div className="scroll-bar">
+            <div>
+                <KanbanBoard/>
+            </div>
+
+
+           /* <div className="scroll-bar">
                 <div className="board">
                     <p className="title">{firstTitle}</p>
                     <div className="board-section">
@@ -96,7 +102,7 @@ const Home = () => {
 
                 </div>
             </div>
-        </div>
+        </div>*/
     )
 }
 export default Home

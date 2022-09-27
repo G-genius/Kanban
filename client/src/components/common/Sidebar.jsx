@@ -9,6 +9,7 @@ import boardApi from '../../api/boardApi'
 import {setBoards} from '../../redux/features/boardSlice'
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import "../../css/Sidebar.css"
+import KanbanBoard from './KanbanBoard'
 
 const Sidebar = () => {
     const user = useSelector((state) => state.user.value)
@@ -50,8 +51,9 @@ const Sidebar = () => {
 
 
     return (
-
+        <div className='components'>
         <div className="side-bar">
+
             <div className="user">
                 <a className="user-name">Пользователь:
                     <a> {user.username} </a>
@@ -59,7 +61,7 @@ const Sidebar = () => {
                 <a className="exit-btn" onClick={exitBtn}>Выйти</a>
             </div>
         </div>
-
+        </div>
     )
 }
 
