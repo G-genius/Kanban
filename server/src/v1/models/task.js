@@ -10,11 +10,11 @@ const taskSchema = new Schema({
   },
   title: {
     type: String,
-    default: ''
+    default: 'undefined'
   },
   content: {
     type: String,
-    default: ''
+    default: 'undefined'
   },
   position: {
     type: Number

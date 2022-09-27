@@ -5,13 +5,22 @@ exports.create = async (req, res) => {
   const { sectionId } = req.body
   try {
     const section = await Section.findById(sectionId)
-    const tasksCount = await Task.find({ section: sectionId }).count()
+    //const tasksCount = await Task.find({ section: sectionId }).count()
     const task = await Task.create({
       section: sectionId,
-      position: tasksCount > 0 ? tasksCount : 0
+      //position: tasksCount > 0 ? tasksCount : 0
     })
     task._doc.section = section
     res.status(201).json(task)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+exports.getAll = async (req, res) => {
+  try {
+    const tasks = await Task.find({ user: req.user._id }).sort('-position')
+    res.status(200).json(tasks)
   } catch (err) {
     res.status(500).json(err)
   }

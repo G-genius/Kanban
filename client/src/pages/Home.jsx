@@ -59,7 +59,7 @@ const Home = () => {
                 <div className="board">
                     <p className="title">{firstTitle}</p>
                     <div className="board-section">
-                        <a className="board-title">Автор: <a className="board-text">{}</a></a>
+                        <a className="board-title">Автор: {}<a className="board-text">{}</a></a>
                         <a className="board-title">Дата создания: <a className="board-text">{}</a></a>
                         <a className="board-title">Клиент: <a className="board-text">{}</a></a>
                         <div className="board-table">
