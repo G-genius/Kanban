@@ -1,12 +1,11 @@
-import { Backdrop, Fade, IconButton, Modal, Box, TextField, Typography, Divider } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import {Backdrop, Fade, IconButton, Modal, Box, TextField, Typography, Divider} from '@mui/material'
+import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import Moment from 'moment'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
+import {CKEditor} from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import taskApi from '../../api/taskApi'
 
-import '../../css/custom-editor.css'
 
 const modalStyle = {
     outline: 'none',
@@ -29,14 +28,30 @@ let isModalClosed = false
 const TaskModal = props => {
     const boardId = props.boardId
     const [task, setTask] = useState(props.task)
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
+    const [author, setAuthor] = useState('')
+    const [date, setDate] = useState('')
+    const [client, setClient] = useState('')
+    const [quickly, setQuickly] = useState('')
+    const [name, setName] = useState('')
+    const [mark, setMark] = useState('')
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
+    const [count, setCount] = useState(0)
+    const [plan, setPlan] = useState(false)
     const editorWrapperRef = useRef()
 
     useEffect(() => {
         setTask(props.task)
-        setTitle(props.task !== undefined ? props.task.title : '')
-        setContent(props.task !== undefined ? props.task.content : '')
+        setAuthor(props.task !== undefined ? props.task.author : '')
+        setDate(props.task !== undefined ? props.task.date : '')
+        setClient(props.task !== undefined ? props.task.client : '')
+        setQuickly(props.task !== undefined ? props.task.quickly : '')
+        setName(props.task !== undefined ? props.task.name : '')
+        setMark(props.task !== undefined ? props.task.mark : '')
+        setWidth(props.task !== undefined ? props.task.width : '')
+        setHeight(props.task !== undefined ? props.task.height : '')
+        setCount(props.task !== undefined ? props.task.count : '')
+        setPlan(props.task !== undefined ? props.task.plan : '')
         if (props.task !== undefined) {
             isModalClosed = false
 
@@ -68,42 +83,162 @@ const TaskModal = props => {
             alert(err)
         }
     }
-
-    const updateTitle = async (e) => {
+    const updateAuthor = async (e) => {
         clearTimeout(timer)
-        const newTitle = e.target.value
+        const newAuthor = e.target.value
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, { title: newTitle })
+                await taskApi.update(boardId, task.id, {author: newAuthor})
             } catch (err) {
                 alert(err)
             }
         }, timeout)
 
-        task.title = newTitle
-        setTitle(newTitle)
+        task.author = newAuthor
+        setAuthor(newAuthor)
+        props.onUpdate(task)
+    }
+    const updateDate = async (e) => {
+        clearTimeout(timer)
+        const newDate = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {date: newDate})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.date = newDate
+        setDate(newDate)
+        props.onUpdate(task)
+    }
+    const updateClient = async (e) => {
+        clearTimeout(timer)
+        const newClient = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {client: newClient})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.client = newClient
+        setClient(newClient)
         props.onUpdate(task)
     }
 
-    const updateContent = async (event, editor) => {
+    const updateName = async (e) => {
         clearTimeout(timer)
-        const data = editor.getData()
+        const newName = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name: newName})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
 
-        console.log({ isModalClosed })
+        task.name = newName
+        setName(newName)
+        props.onUpdate(task)
+    }
 
-        if (!isModalClosed) {
-            timer = setTimeout(async () => {
-                try {
-                    await taskApi.update(boardId, task.id, { content: data })
-                } catch (err) {
-                    alert(err)
-                }
-            }, timeout);
+    const updateMark = async (e) => {
+        clearTimeout(timer)
+        const newMark = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {mark: newMark})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
 
-            task.content = data
-            setContent(data)
-            props.onUpdate(task)
-        }
+        task.mark = newMark
+        setMark(newMark)
+        props.onUpdate(task)
+    }
+
+    const updateWidth = async (e) => {
+        clearTimeout(timer)
+        const newWidth = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {width: newWidth})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.width = newWidth
+        setWidth(newWidth)
+        props.onUpdate(task)
+    }
+
+    const updateHeight = async (e) => {
+        clearTimeout(timer)
+        const newHeight = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {height: newHeight})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.height = newHeight
+        setHeight(newHeight)
+        props.onUpdate(task)
+    }
+
+    const updateCount = async (e) => {
+        clearTimeout(timer)
+        const newCount = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {count: newCount})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.count = newCount
+        setCount(newCount)
+        props.onUpdate(task)
+    }
+
+    const updatePlan = async (e) => {
+        clearTimeout(timer)
+        const newPlan = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {plan: newPlan})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.plan = newPlan
+        setPlan(newPlan)
+        props.onUpdate(task)
+    }
+
+    const updateQiuckly = async (e) => {
+        clearTimeout(timer)
+        const newQuikcly = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {quickly: newQuikcly})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.quickly = newQuikcly
+        setQuickly(newQuikcly)
+        props.onUpdate(task)
     }
 
     return (
@@ -112,7 +247,7 @@ const TaskModal = props => {
             onClose={onClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
-            BackdropProps={{ timeout: 500 }}
+            BackdropProps={{timeout: 500}}
         >
             <Fade in={task !== undefined}>
                 <Box sx={modalStyle}>
@@ -123,51 +258,58 @@ const TaskModal = props => {
                         width: '100%'
                     }}>
                         <IconButton variant='outlined' color='error' onClick={deleteTask}>
-                            <DeleteOutlinedIcon />
+                            <DeleteOutlinedIcon/>
                         </IconButton>
                     </Box>
-                    <Box sx={{
-                        display: 'flex',
-                        height: '100%',
-                        flexDirection: 'column',
-                        padding: '2rem 5rem 5rem'
-                    }}>
-                        <TextField
-                            value={title}
-                            onChange={updateTitle}
-                            placeholder='Untitled'
-                            variant='outlined'
-                            fullWidth
-                            sx={{
-                                width: '100%',
-                                '& .MuiOutlinedInput-input': { padding: 0 },
-                                '& .MuiOutlinedInput-notchedOutline': { border: 'unset ' },
-                                '& .MuiOutlinedInput-root': { fontSize: '2.5rem', fontWeight: '700' },
-                                marginBottom: '10px'
-                            }}
-                        />
-                        <Typography variant='body2' fontWeight='700'>
-                            {task !== undefined ? Moment(task.createdAt).format('YYYY-MM-DD') : ''}
-                        </Typography>
-                        <Divider sx={{ margin: '1.5rem 0' }} />
-                        <Box
-                            ref={editorWrapperRef}
-                            sx={{
-                                position: 'relative',
-                                height: '80%',
-                                overflowX: 'hidden',
-                                overflowY: 'auto'
-                            }}
-                        >
-                            <CKEditor
-                                editor={ClassicEditor}
-                                data={content}
-                                onChange={updateContent}
-                                onFocus={updateEditorHeight}
-                                onBlur={updateEditorHeight}
-                            />
-                        </Box>
-                    </Box>
+                    <TextField
+                        value={author}
+                        onChange={updateAuthor}
+                        placeholder='Untitled'/>
+                    <TextField
+                        value={date}
+                        onChange={updateDate}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={client}
+                        onChange={updateClient}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={name}
+                        onChange={updateName}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={mark}
+                        onChange={updateMark}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={width}
+                        onChange={updateWidth}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={height}
+                        onChange={updateHeight}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={count}
+                        onChange={updateCount}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={plan}
+                        onChange={updatePlan}
+                        placeholder='Untitled'
+                    />
+                    <TextField
+                        value={quickly}
+                        onChange={updateQiuckly}
+                        placeholder='Untitled'
+                    />
                 </Box>
             </Fade>
         </Modal>
