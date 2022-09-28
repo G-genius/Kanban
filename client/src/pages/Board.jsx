@@ -1,12 +1,7 @@
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined'
-import StarOutlinedIcon from '@mui/icons-material/StarOutlined'
-import { Box, IconButton, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import boardApi from '../api/boardApi'
-import Kanban from '../components/common/Kanban'
 import { setBoards } from '../redux/features/boardSlice'
 import { setFavouriteList } from '../redux/features/favouriteSlice'
 import KanbanBoard from "../components/common/KanbanBoard";
@@ -142,21 +137,12 @@ const Board = () => {
 
   return (
       <>
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%'
-        }}>
-
-        </Box>
-        <Box sx={{ padding: '10px 50px' }}>
-
-          <Box>
+        <div className='BoardKanban'>
+          <div className='kanban_board'>
             {/* Kanban board */}
             <KanbanBoard data={sections} boardId={boardId} />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </>
   )
 }

@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import authUtils from '../../utils/authUtils'
 import assets from '../../assets'
+import '../../css/Main.css';
 
 const AuthLayout = () => {
     const navigate = useNavigate()
@@ -21,15 +22,10 @@ const AuthLayout = () => {
     return (
         (
             <Container component='main' maxWidth='xs'>
-                <Box sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: 'column'
-                }}>
+                <div classname='authLayout'>
                     <img src={assets.images.logolight} style={{ width: '100px' }} alt='app logo' />
                     <Outlet />
-                </Box>
+                </div>
             </Container>
         )
     )

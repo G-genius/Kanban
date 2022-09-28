@@ -1,9 +1,6 @@
-import {Backdrop, Fade, IconButton, Modal, Box, TextField, Typography, Divider} from '@mui/material'
+import {Backdrop, Fade, IconButton, Modal, Box, TextField } from '@mui/material'
 import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-import Moment from 'moment'
-import {CKEditor} from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import taskApi from '../../api/taskApi'
 
 

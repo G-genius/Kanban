@@ -30,18 +30,10 @@ const AppLayout = () => {
     loading ? (
       <Loading fullHeight />
     ) : (
-      <Box sx={{
-        display: 'flex'
-      }}>
-        <Sidebar />
-        <Box sx={{
-          flexGrow: 1,
-          p: 1,
-          width: 'max-content'
-        }}>
+        <div>
+          <Sidebar />
           <Outlet />
-        </Box>
-      </Box>
+        </div>
     )
   )
 }

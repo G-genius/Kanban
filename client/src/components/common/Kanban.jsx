@@ -1,13 +1,8 @@
-import { Box, Button, Typography, Divider, TextField, IconButton, Card } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import sectionApi from '../../api/sectionApi'
 import Home from "../../pages/Home";
 import {useDispatch, useSelector} from "react-redux";
 import {setSection} from "../../redux/features/sectionSlice";
-import taskApi from "../../api/taskApi";
 
 const Kanban = props => {
     const boardId = props.boardId
@@ -27,21 +22,6 @@ const Kanban = props => {
         }
         getSection()
     }, [dispatch])
-
-    //const task = useSelector((state) => state.task.value)
-
-    // useEffect(() => {
-    //     const getTask = async () => {
-    //         try {
-    //             const res = await taskApi.getAll()
-    //             dispatch(setSection(res))
-    //         } catch (err) {
-    //             alert(err)
-    //         }
-    //     }
-    //     getTask()
-    // }, [dispatch])
-
 
     let sectionId = ''
     const getId = () => {

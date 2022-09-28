@@ -1,12 +1,11 @@
-import { Box, Button, Typography, Divider, TextField, IconButton, Card } from '@mui/material'
+import { Box, Typography, Divider, TextField, IconButton, Card } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import sectionApi from '../../api/sectionApi'
 import taskApi from '../../api/taskApi'
 import TaskModal from './TaskModal'
-
+import '../../css/Main.css';
 let timer
 const timeout = 500
 
@@ -133,18 +132,17 @@ const Kanban = props => {
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    width: 'calc(100vw - 400px)',
                     overflowX: 'auto'
                 }}>
                     {
                         data.map(section => (
-                            <div key={section.id} style={{ width: '300px' }}>
+                            <div key={section.id} style={{ width: '650px' }}>
                                 <Droppable key={section.id} droppableId={section.id}>
                                     {(provided) => (
                                         <Box
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
-                                            sx={{ width: '300px', padding: '10px', marginRight: '10px' }}
+                                            sx={{ width: '620px', padding: '10px', marginRight: '30px' }}
                                         >
                                             <Box sx={{
                                                 display: 'flex',
@@ -158,24 +156,10 @@ const Kanban = props => {
                                                     placeholder='Untitled'
                                                     variant='outlined'
                                                     sx={{
-                                                        flexGrow: 1,
-                                                        '& .MuiOutlinedInput-input': { padding: 0 },
                                                         '& .MuiOutlinedInput-notchedOutline': { border: 'unset ' },
                                                         '& .MuiOutlinedInput-root': { fontSize: '1rem', fontWeight: '700' }
                                                     }}
                                                 />
-                                                <IconButton
-                                                    variant='outlined'
-                                                    size='small'
-                                                    sx={{
-                                                        color: 'gray',
-                                                        '&:hover': { color: 'green' }
-                                                    }}
-                                                    onClick={() => createTask(section.id)}
-                                                >
-                                                    <AddOutlinedIcon />
-                                                </IconButton>
-
                                             </Box>
                                             {/* tasks */}
                                             {
@@ -189,26 +173,45 @@ const Kanban = props => {
 
                                                                 onClick={() => setSelectedTask(task)}
                                                             >
+
+                                                                
                                                                 <Typography>
                                                                     <div className="board">
                                                                         <div className="board-section">
+                                                                            <div className='board_header'>
                                                                             <a className="board-title">Автор: {task.author}<a className="board-text">{}</a></a>
-                                                                            <a className="board-title">Дата создания: {task.date}<a className="board-text">{}</a></a>
-                                                                            <a className="board-title">Клиент: {task.client}<a className="board-text">{}</a></a>
-                                                                            <div className="board-table">
-                                                                                <a className="board-table">Наименование {task.name}</a>
-                                                                                <a className="board-table">Марка {task.mark}</a>
-                                                                                <a className="board-table">Ширина {task.width}</a>
-                                                                                <a className="board-table">Длина {task.height}</a>
-                                                                                <a className="board-table">Кол-во {task.count}</a>
-                                                                                <a className="board-table">Чертёж {task.plan}</a>
+                                                                            <a className="board-title">{task.date}<a className="board-text">{}</a></a>
                                                                             </div>
                                                                             <div>
+                                                                            <a className="board-title">Клиент: {task.client}<a className="board-text">{}</a></a>
+                                                                            </div>
+                                                                            <div className="board_table_column">
+                                                                                <a className="board_column">Наименование {task.name}</a>
+                                                                                <a className="board_column">Марка {task.mark}</a>
+                                                                                <a className="board_column">Ширина {task.width}</a>
+                                                                                <a className="board_column">Длина {task.height}</a>
+                                                                                <a className="board_column">Кол-во {task.count}</a>
+                                                                                <a className="board_column">Чертёж {task.plan}</a>
+                                                                            </div>
+                                                                            <div className='podval'>
                                                                                 <a className="board-text"><input type="checkbox" className="board-title"/> Срочно</a>
+                                                                                <button className='redactir' onClick={onUpdateTask}>Редактировать</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </Typography>
+                                                                <IconButton
+                                                                    variant='outlined'
+                                                                    size='small'
+                                                                    sx={{
+                                                                    display: 'flex',
+                                                                    margin: '0 auto',
+                                                                    '&:hover': { color: 'green' }
+                                                                    }}
+                                                                    onClick={() => createTask(section.id)}
+                                                                >
+                                                    <AddOutlinedIcon />
+                                                </IconButton>
                                                             </Card>
                                                         )}
                                                     </Draggable>
