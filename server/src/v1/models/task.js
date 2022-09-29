@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const {schemaOptions} = require('./modelOptions')
 
+let currentTime = new Date().toLocaleString("ru-RU", )
+let currentDate = new Date()
+let currentYear = new Date()
+
 const taskSchema = new Schema({
     section: {
         type: Schema.Types.ObjectId,
@@ -9,44 +13,36 @@ const taskSchema = new Schema({
         required: true
     },
     author: {
-        type: String,
-        default: 'undefined'
-    },
+        type: String
+    }, //currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + "  " + currentTime
     date: {
         type: String,
-        default: 'undefined'
+        default: currentTime
     },
     client: {
-        type: String,
-        default: 'undefined'
+        type: String
     },
     quickly: {
-        type: String,
-        default: 'undefined'
+        type: Boolean,
+        default: false
     },
     name: {
-        type: String,
-        default: 'undefined'
+        type: String
     },
     mark: {
-        type: String,
-        default: 'undefined'
+        type: String
     },
     width: {
-        type: String,
-        default: 'undefined'
+        type: Number
     },
     height: {
-        type: String,
-        default: 'undefined'
+        type: Number
     },
     count: {
-        type: String,
-        default: 'undefined'
+        type: Number
     },
     plan: {
-        type: String,
-        default: 'undefined'
+        type: String
     },
     position: {
         type: Number

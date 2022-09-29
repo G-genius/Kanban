@@ -55,41 +55,6 @@ const Kanban = props => {
         }
     }
 
-    const createSection = async () => {
-        try {
-            const section = await sectionApi.create(boardId)
-            setData([...data, section])
-        } catch (err) {
-            alert(err)
-        }
-    }
-
-    const deleteSection = async (sectionId) => {
-        try {
-            await sectionApi.delete(boardId, sectionId)
-            const newData = [...data].filter(e => e.id !== sectionId)
-            setData(newData)
-        } catch (err) {
-            alert(err)
-        }
-    }
-
-    const updateSectionTitle = async (e, sectionId) => {
-        clearTimeout(timer)
-        const newTitle = e.target.value
-        const newData = [...data]
-        const index = newData.findIndex(e => e.id === sectionId)
-        newData[index].title = newTitle
-        setData(newData)
-        timer = setTimeout(async () => {
-            try {
-                await sectionApi.update(boardId, sectionId, { title: newTitle })
-            } catch (err) {
-                alert(err)
-            }
-        }, timeout);
-    }
-
     const createTask = async (sectionId) => {
         try {
             const task = await taskApi.create(boardId, { sectionId })
@@ -132,7 +97,8 @@ const Kanban = props => {
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    overflowX: 'auto'
+                    overflowX: 'auto',
+                    marginBottom: '10px'
                 }}>
                     {
                         data.map(section => (
@@ -150,16 +116,7 @@ const Kanban = props => {
                                                 justifyContent: 'space-between',
                                                 marginBottom: '10px'
                                             }}>
-                                                <TextField
-                                                    value={section.title}
-                                                    onChange={(e) => updateSectionTitle(e, section.id)}
-                                                    placeholder='Untitled'
-                                                    variant='outlined'
-                                                    sx={{
-                                                        '& .MuiOutlinedInput-notchedOutline': { border: 'unset ' },
-                                                        '& .MuiOutlinedInput-root': { fontSize: '1rem', fontWeight: '700' }
-                                                    }}
-                                                />
+                                                <a>{section.title}</a>
                                             </Box>
                                             {/* tasks */}
                                             {
@@ -170,11 +127,7 @@ const Kanban = props => {
                                                                 ref={provided.innerRef}
                                                                 {...provided.draggableProps}
                                                                 {...provided.dragHandleProps}
-
-                                                                onClick={() => setSelectedTask(task)}
                                                             >
-
-                                                                
                                                                 <Typography>
                                                                     <div className="board">
                                                                         <div className="board-section">
@@ -195,7 +148,7 @@ const Kanban = props => {
                                                                             </div>
                                                                             <div className='podval'>
                                                                                 <a className="board-text"><input type="checkbox" className="board-title"/> Срочно</a>
-                                                                                <button className='redactir' onClick={onUpdateTask}>Редактировать</button>
+                                                                                <button className='redactir' onClick={() => setSelectedTask(task)}>Редактировать</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>

@@ -261,51 +261,51 @@ const TaskModal = props => {
                     <TextField
                         value={author}
                         onChange={updateAuthor}
-                        placeholder='Untitled'/>
+                        placeholder='Автор'/>
                     <TextField
                         value={date}
                         onChange={updateDate}
-                        placeholder='Untitled'
+                        placeholder='Дата создания'
                     />
                     <TextField
                         value={client}
                         onChange={updateClient}
-                        placeholder='Untitled'
+                        placeholder='Клиент'
                     />
                     <TextField
                         value={name}
                         onChange={updateName}
-                        placeholder='Untitled'
+                        placeholder='Наименование'
                     />
                     <TextField
                         value={mark}
                         onChange={updateMark}
-                        placeholder='Untitled'
+                        placeholder='Марка'
                     />
                     <TextField
                         value={width}
                         onChange={updateWidth}
-                        placeholder='Untitled'
+                        placeholder='Ширина заготовки'
                     />
                     <TextField
                         value={height}
                         onChange={updateHeight}
-                        placeholder='Untitled'
+                        placeholder='Длина заготовки'
                     />
                     <TextField
                         value={count}
                         onChange={updateCount}
-                        placeholder='Untitled'
+                        placeholder='Кол-во'
                     />
                     <TextField
                         value={plan}
                         onChange={updatePlan}
-                        placeholder='Untitled'
+                        placeholder='Чертёж'
                     />
                     <TextField
                         value={quickly}
                         onChange={updateQiuckly}
-                        placeholder='Untitled'
+                        placeholder='Срочно'
                     />
                 </Box>
             </Fade>
