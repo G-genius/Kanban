@@ -1,4 +1,4 @@
-import {Backdrop, Fade, IconButton, Modal, Box, TextField } from '@mui/material'
+import {Backdrop, Fade, IconButton, Modal, Box, TextField} from '@mui/material'
 import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import taskApi from '../../api/taskApi'
@@ -224,19 +224,37 @@ const TaskModal = props => {
 
     const updateQiuckly = async (e) => {
         clearTimeout(timer)
-        const newQuikcly = e.target.value
-        timer = setTimeout(async () => {
-            try {
-                await taskApi.update(boardId, task.id, {quickly: newQuikcly})
-            } catch (err) {
-                alert(err)
-            }
-        }, timeout)
+        // const newQuikcly = e.target.value
+        // timer = setTimeout(async () => {
+        //     try {
+        //         await taskApi.update(boardId, task.id, {quickly: newQuikcly})
+        //     } catch (err) {
+        //         alert(err)
+        //     }
+        // }, timeout)
+        //
+        // task.quickly = newQuikcly
 
-        task.quickly = newQuikcly
-        setQuickly(newQuikcly)
+
+
+        let isChecked = document.getElementById('one')
+        //const newChecked = e.target.isChecked.value
+        if (isChecked.checked == true) {
+            isChecked.value = true
+            task.quickly = true
+            setQuickly(true)
+        }
+        else {
+            isChecked.value = false
+            task.quickly = false
+            setQuickly(isChecked.value)
+        }
         props.onUpdate(task)
+        console.log(isChecked.checked)
+        console.log(isChecked.value)
+        //console.log(newChecked)
     }
+
 
     return (
         <Modal
@@ -302,9 +320,9 @@ const TaskModal = props => {
                         onChange={updatePlan}
                         placeholder='Чертёж'
                     />
-                    <TextField
+                    <input
+                        type="checkbox" id="one" onChange={updateQiuckly}
                         value={quickly}
-                        onChange={updateQiuckly}
                         placeholder='Срочно'
                     />
                 </Box>

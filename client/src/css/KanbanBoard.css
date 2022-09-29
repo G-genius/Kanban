@@ -22,12 +22,14 @@
     align-items: center;
     font-weight: normal;
 }
-
+.board_column {
+}
 .board-section{
     background: #B6B2B2;
     padding: 8px;
     display: flex;
     flex-direction: column;
+    width: 550px;
 }
 .board-title {
     font-weight: bold;
@@ -46,7 +48,7 @@
 }
 
 
+
 .board_table_column {
     display: flex;
-    justify-content: baseline;
 }

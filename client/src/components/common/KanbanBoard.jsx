@@ -1,13 +1,12 @@
-import { Box, Typography, Divider, TextField, IconButton, Card } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import {Box, Typography, Divider, TextField, IconButton, Card} from '@mui/material'
+import {useEffect, useState} from 'react'
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 import sectionApi from '../../api/sectionApi'
 import taskApi from '../../api/taskApi'
 import TaskModal from './TaskModal'
 import '../../css/Main.css';
-let timer
-const timeout = 500
+
 
 const Kanban = props => {
     const boardId = props.boardId
@@ -18,7 +17,7 @@ const Kanban = props => {
         setData(props.data)
     }, [props.data])
 
-    const onDragEnd = async ({ source, destination }) => {
+    const onDragEnd = async ({source, destination}) => {
         if (!destination) return
         const sourceColIndex = data.findIndex(e => e.id === source.droppableId)
         const destinationColIndex = data.findIndex(e => e.id === destination.droppableId)
@@ -57,7 +56,7 @@ const Kanban = props => {
 
     const createTask = async (sectionId) => {
         try {
-            const task = await taskApi.create(boardId, { sectionId })
+            const task = await taskApi.create(boardId, {sectionId})
             const newData = [...data]
             const index = newData.findIndex(e => e.id === sectionId)
             newData[index].tasks.unshift(task)
@@ -83,8 +82,10 @@ const Kanban = props => {
         setData(newData)
     }
 
+
+
     return (
-        <>
+        <div className="kanban-board">
             <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -92,29 +93,30 @@ const Kanban = props => {
             }}>
 
             </Box>
-            <Divider sx={{ margin: '10px 0' }} />
+            <Divider sx={{margin: '10px 0'}}/>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'flex-start',
                     overflowX: 'auto',
-                    marginBottom: '10px'
+                    marginTop: '50px'
                 }}>
                     {
                         data.map(section => (
-                            <div key={section.id} style={{ width: '650px' }}>
+                            <div key={section.id} style={{width: '600px'}}>
                                 <Droppable key={section.id} droppableId={section.id}>
                                     {(provided) => (
                                         <Box
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
-                                            sx={{ width: '620px', padding: '10px', marginRight: '30px' }}
+                                            sx={{width: '560px', padding: '10px', marginRight: '30px', background: "#D9D9D9", minHeight: "584px"}}
                                         >
                                             <Box sx={{
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'space-between',
-                                                marginBottom: '10px'
+                                                padding: '10px',
+                                                fontWeight: "bold"
                                             }}>
                                                 <a>{section.title}</a>
                                             </Box>
@@ -132,11 +134,14 @@ const Kanban = props => {
                                                                     <div className="board">
                                                                         <div className="board-section">
                                                                             <div className='board_header'>
-                                                                            <a className="board-title">Автор: {task.author}<a className="board-text">{}</a></a>
-                                                                            <a className="board-title">{task.date}<a className="board-text">{}</a></a>
+                                                                                <a className="board-title">Автор: {task.author}<a
+                                                                                    className="board-text">{}</a></a>
+                                                                                <a className="board-title">{task.date}<a
+                                                                                    className="board-text">{}</a></a>
                                                                             </div>
                                                                             <div>
-                                                                            <a className="board-title">Клиент: {task.client}<a className="board-text">{}</a></a>
+                                                                                <a className="board-title">Клиент: {task.client}<a
+                                                                                    className="board-text">{}</a></a>
                                                                             </div>
                                                                             <div className="board_table_column">
                                                                                 <a className="board_column">Наименование {task.name}</a>
@@ -147,8 +152,13 @@ const Kanban = props => {
                                                                                 <a className="board_column">Чертёж {task.plan}</a>
                                                                             </div>
                                                                             <div className='podval'>
-                                                                                <a className="board-text"><input type="checkbox" className="board-title"/> Срочно</a>
-                                                                                <button className='redactir' onClick={() => setSelectedTask(task)}>Редактировать</button>
+                                                                                <a className="board-text" id="checkbox-quickly"><input
+                                                                                    type="checkbox"
+                                                                                    value={task.quickly}
+                                                                                    className="board-title"/> Срочно</a>
+                                                                                <button className='redactir'
+                                                                                        onClick={() => setSelectedTask(task)}>Редактировать
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -157,14 +167,14 @@ const Kanban = props => {
                                                                     variant='outlined'
                                                                     size='small'
                                                                     sx={{
-                                                                    display: 'flex',
-                                                                    margin: '0 auto',
-                                                                    '&:hover': { color: 'green' }
+                                                                        display: 'flex',
+                                                                        margin: '0 auto',
+                                                                        '&:hover': {color: 'green'}
                                                                     }}
                                                                     onClick={() => createTask(section.id)}
                                                                 >
-                                                    <AddOutlinedIcon />
-                                                </IconButton>
+                                                                    <AddOutlinedIcon/>
+                                                                </IconButton>
                                                             </Card>
                                                         )}
                                                     </Draggable>
@@ -186,7 +196,7 @@ const Kanban = props => {
                 onUpdate={onUpdateTask}
                 onDelete={onDeleteTask}
             />
-        </>
+        </div>
     )
 }
 
