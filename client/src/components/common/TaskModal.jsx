@@ -222,38 +222,38 @@ const TaskModal = props => {
         props.onUpdate(task)
     }
 
+
+
     const updateQiuckly = async (e) => {
-        clearTimeout(timer)
-        // const newQuikcly = e.target.value
+
+
+        let isChecked = document.getElementById('one')
+
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {quickly: isChecked.checked})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+
+        console.log(isChecked.checked)
+        // clearTimeout(timer)
+        // const newQuickly = e.target.value
         // timer = setTimeout(async () => {
         //     try {
-        //         await taskApi.update(boardId, task.id, {quickly: newQuikcly})
+        //         await taskApi.update(boardId, task.id, {plan: newQuickly})
         //     } catch (err) {
         //         alert(err)
         //     }
         // }, timeout)
         //
-        // task.quickly = newQuikcly
-
-
-
-        let isChecked = document.getElementById('one')
-        //const newChecked = e.target.isChecked.value
-        if (isChecked.checked == true) {
-            isChecked.value = true
-            task.quickly = true
-            setQuickly(true)
-        }
-        else {
-            isChecked.value = false
-            task.quickly = false
-            setQuickly(isChecked.value)
-        }
-        props.onUpdate(task)
-        console.log(isChecked.checked)
-        console.log(isChecked.value)
-        //console.log(newChecked)
+        // task.quickly = newQuickly
+        // setQuickly(newQuickly)
+        // props.onUpdate(task)
     }
+
 
 
     return (
@@ -321,9 +321,11 @@ const TaskModal = props => {
                         placeholder='Чертёж'
                     />
                     <input
-                        type="checkbox" id="one" onChange={updateQiuckly}
-                        value={quickly}
+                        type="checkbox"
+                        id="one"
+                        onChange={updateQiuckly}
                         placeholder='Срочно'
+                        value={quickly}
                     />
                 </Box>
             </Fade>

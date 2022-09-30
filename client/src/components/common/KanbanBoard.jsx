@@ -82,8 +82,15 @@ const Kanban = props => {
         setData(newData)
     }
 
-
-
+    // const onChangeCheckBox = () => {
+    //     //let status = document.getElementById('chBox')
+    //     // if (isChecked.checked == true) {
+    //     //
+    //     // }
+    //     //document.getElementById('board-section').style.background = "red"
+    //     //console.log(status.value)
+    // }
+    // onChangeCheckBox()
     return (
         <div className="kanban-board">
             <Box sx={{
@@ -109,7 +116,13 @@ const Kanban = props => {
                                         <Box
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
-                                            sx={{width: '560px', padding: '10px', marginRight: '30px', background: "#D9D9D9", minHeight: "584px"}}
+                                            sx={{
+                                                width: '560px',
+                                                padding: '10px',
+                                                marginRight: '30px',
+                                                background: "#D9D9D9",
+                                                minHeight: "584px"
+                                            }}
                                         >
                                             <Box sx={{
                                                 display: 'flex',
@@ -123,6 +136,7 @@ const Kanban = props => {
                                             {/* tasks */}
                                             {
                                                 section.tasks.map((task, index) => (
+
                                                     <Draggable key={task.id} draggableId={task.id} index={index}>
                                                         {(provided, snapshot) => (
                                                             <Card
@@ -132,7 +146,7 @@ const Kanban = props => {
                                                             >
                                                                 <Typography>
                                                                     <div className="board">
-                                                                        <div className="board-section">
+                                                                        <div className="board-section" id="board-section">
                                                                             <div className='board_header'>
                                                                                 <a className="board-title">Автор: {task.author}<a
                                                                                     className="board-text">{}</a></a>
@@ -152,9 +166,11 @@ const Kanban = props => {
                                                                                 <a className="board_column">Чертёж {task.plan}</a>
                                                                             </div>
                                                                             <div className='podval'>
-                                                                                <a className="board-text" id="checkbox-quickly"><input
+                                                                                <a className="board-text"
+                                                                                   id="chBox"><input
                                                                                     type="checkbox"
                                                                                     value={task.quickly}
+                                                                                    checked={task.quickly}
                                                                                     className="board-title"/> Срочно</a>
                                                                                 <button className='redactir'
                                                                                         onClick={() => setSelectedTask(task)}>Редактировать
