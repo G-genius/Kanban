@@ -2,6 +2,7 @@ import {Backdrop, Fade, IconButton, Modal, Box, TextField} from '@mui/material'
 import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import taskApi from '../../api/taskApi'
+import FileBase64 from 'react-filebase64';
 
 
 const modalStyle = {
@@ -29,13 +30,13 @@ const TaskModal = props => {
     const [author, setAuthor] = useState('')
     const [date, setDate] = useState()
     const [client, setClient] = useState('')
-    const [quickly, setQuickly] = useState('')
+    const [quickly, setQuickly] = useState(false)
     const [name, setName] = useState('')
     const [mark, setMark] = useState('')
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
     const [count, setCount] = useState(0)
-    const [plan, setPlan] = useState(false)
+    const [plan, setPlan] = useState('')
     const editorWrapperRef = useRef()
 
 
@@ -208,20 +209,21 @@ const TaskModal = props => {
         props.onUpdate(task)
     }
 
-    const updatePlan = async (e) => {
+    const updatePlan = async (base64) => {
         clearTimeout(timer)
-        const newPlan = e.target.value
+        // const newPlan = e.target.value
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {plan: newPlan})
+                await taskApi.update(boardId, task.id, {plan: base64.base64})
             } catch (err) {
                 alert(err)
             }
         }, timeout)
 
-        task.plan = newPlan
-        setPlan(newPlan)
-        props.onUpdate(task)
+        task.plan = base64.base64
+        setPlan(base64.base64)
+        props.onUpdate(base64.base64)
+        console.log(base64.base64)
     }
 
 
@@ -317,11 +319,16 @@ const TaskModal = props => {
                         onChange={updateCount}
                         placeholder='Кол-во'
                     />
-                    <TextField
-                        value={plan}
-                        onChange={updatePlan}
-                        placeholder='Чертёж'
-                    />
+                    {/*<TextField*/}
+                    {/*    value={plan}*/}
+                    {/*    onChange={updatePlan}*/}
+                    {/*    placeholder='Чертёж'*/}
+                    {/*/>*/}
+                    <br/>
+                    <a>План</a>
+                    <FileBase64
+                        multiple={ false }
+                        onDone={updatePlan} />
                     <input
                         type="checkbox"
                         id="one"
@@ -329,6 +336,10 @@ const TaskModal = props => {
                         placeholder='Срочно'
                         value={quickly}
                     />
+                    <div >
+                        <img src={plan} />
+                        <button></button>
+                    </div>
                 </Box>
             </Fade>
         </Modal>
