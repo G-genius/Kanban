@@ -11,10 +11,13 @@ import '../../css/Main.css';
 const Kanban = props => {
     const boardId = props.boardId
     const [data, setData] = useState([])
+    const [quickly, setQuickly] = useState(false)
     const [selectedTask, setSelectedTask] = useState(undefined)
+    
 
     useEffect(() => {
         setData(props.data)
+        setQuickly(props.quickly)
     }, [props.data])
 
     const onDragEnd = async ({source, destination}) => {
@@ -82,32 +85,34 @@ const Kanban = props => {
         newData[sectionIndex].tasks.splice(taskIndex, 1)
         setData(newData)
     }
-
+    console.log(data)
     const checkQuickly = () => {
-        // if (task.quickly == true) {
-        //     document.getElementById('board-section').style.background = "red"
-        // }
-        let id
+        if (quickly === true) {
+        document.getElementById('board-section').style.background = "red"
+        }
+        let status
         for(let i = 0; i < data[0].tasks.length; i++){
-            id = data[0].tasks[i].quickly
-            console.log(id)
-            if (id == false) {
+            status = data[0].tasks[i].quickly
+            console.log(status)
+            if (status === true) {
                 document.getElementById('board-section').style.background = "red"
             }
         }
-
     }
     //checkQuickly()
 
-    // const onChangeCheckBox = () => {
-    //     //let status = document.getElementById('chBox')
-    //     // if (isChecked.checked == true) {
-    //     //
-    //     // }
-    //     //document.getElementById('board-section').style.background = "red"
-    //     //console.log(status.value)
-    // }
-    // onChangeCheckBox()
+
+
+    /*const onChangeCheckBox = () => {
+    let status = document.querySelectorAll('chBox')
+         if (isChecked.checked == true) {
+        
+          }
+        document.getElementById('board-section').style.background = "red"
+        console.log(status.value)
+     }
+    onChangeCheckBox()*/
+
     return (
         <div className="kanban-board">
             <Box sx={{
@@ -127,6 +132,7 @@ const Kanban = props => {
                 }}>
                     {
                         data.map(section => (
+
                             <div key={section.id} style={{width: '600px'}}>
                                 <Droppable key={section.id} droppableId={section.id}>
                                     {(provided) => (
@@ -208,7 +214,9 @@ const Kanban = props => {
                                                                                 </a>
                                                                                 <a className="board_column">Чертёж
                                                                                     <a className="board-text">{task.plan}</a>
-
+                                                                                </a>
+                                                                                <a className="board_column">Срочно
+                                                                                    <a className="board-text">{task.quickly}</a>
                                                                                 </a>
 
 
@@ -220,7 +228,7 @@ const Kanban = props => {
                                                                                     type="checkbox"
                                                                                     value={task.quickly}
                                                                                     checked={task.quickly}
-                                                                                    className="board-title"/> Срочно</a>
+                                                                                    className="board-title"/>Срочно</a>
                                                                                 <button className='redactir'
                                                                                         onClick={() => setSelectedTask(task)}>Редактировать
                                                                                 </button>
@@ -264,6 +272,8 @@ const Kanban = props => {
             />
         </div>
     )
+
 }
+
 
 export default Kanban

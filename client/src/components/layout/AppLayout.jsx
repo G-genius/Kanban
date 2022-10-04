@@ -30,10 +30,10 @@ const AppLayout = () => {
     loading ? (
       <Loading fullHeight />
     ) : (
-        <div>
+        <Box>
           <Sidebar />
           <Outlet />
-        </div>
+        </Box>
     )
   )
 }

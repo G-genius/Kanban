@@ -29,7 +29,7 @@ const TaskModal = props => {
     const [author, setAuthor] = useState('')
     const [date, setDate] = useState()
     const [client, setClient] = useState('')
-    const [quickly, setQuickly] = useState('')
+    const [quickly, setQuickly] = useState(false)
     const [name, setName] = useState('')
     const [mark, setMark] = useState('')
     const [width, setWidth] = useState(0)
@@ -233,14 +233,26 @@ const TaskModal = props => {
 
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {quickly: isChecked})
+                if (isChecked === true) {
+                    await taskApi.update(boardId, task.id, {quickly: isChecked})
+                    document.getElementById('board-section').style.background = "red"
+                }
+                else if (isChecked === false){
+                    await taskApi.update(boardId, task.id, {quickly: isChecked})
+                    document.getElementById('board-section').style.background = "#B6B2B2"
+                }
+
             } catch (err) {
                 alert(err)
             }
-        }, timeout)
 
+        }, timeout)
+        task.quickly = isChecked
+        setQuickly(isChecked)
+        props.onUpdate(task)
 
         console.log(isChecked)
+
         // clearTimeout(timer)
         // const newQuickly = e.target.value
         // timer = setTimeout(async () => {
@@ -251,9 +263,9 @@ const TaskModal = props => {
         //     }
         // }, timeout)
         //
-        // task.quickly = newQuickly
-        // setQuickly(newQuickly)
-        // props.onUpdate(task)
+
+
+
     }
 
 
