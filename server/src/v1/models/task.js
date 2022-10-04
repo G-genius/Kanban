@@ -16,8 +16,7 @@ const taskSchema = new Schema({
         type: String
     }, //currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + "  " + currentTime
     date: {
-        type: String,
-        default: currentTime
+        type: String
     },
     client: {
         type: String

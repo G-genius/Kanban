@@ -22,8 +22,7 @@
     align-items: center;
     font-weight: normal;
 }
-.board_column {
-}
+
 .board-section{
     background: #B6B2B2;
     padding: 8px;
@@ -48,7 +47,14 @@
 }
 
 
+.board_column {
+    margin-right: 20px;
+    font-weight: bold;
 
+}
 .board_table_column {
     display: flex;
+
+}
+.board-names {
 }

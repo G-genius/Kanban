@@ -72,8 +72,9 @@ const Kanban = props => {
         const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
         newData[sectionIndex].tasks[taskIndex] = task
         setData(newData)
-    }
 
+
+    }
     const onDeleteTask = (task) => {
         const newData = [...data]
         const sectionIndex = newData.findIndex(e => e.id === task.section.id)
@@ -81,6 +82,22 @@ const Kanban = props => {
         newData[sectionIndex].tasks.splice(taskIndex, 1)
         setData(newData)
     }
+
+    const checkQuickly = () => {
+        // if (task.quickly == true) {
+        //     document.getElementById('board-section').style.background = "red"
+        // }
+        let id
+        for(let i = 0; i < data[0].tasks.length; i++){
+            id = data[0].tasks[i].quickly
+            console.log(id)
+            if (id == false) {
+                document.getElementById('board-section').style.background = "red"
+            }
+        }
+
+    }
+    //checkQuickly()
 
     // const onChangeCheckBox = () => {
     //     //let status = document.getElementById('chBox')
@@ -106,7 +123,7 @@ const Kanban = props => {
                     display: 'flex',
                     alignItems: 'flex-start',
                     overflowX: 'auto',
-                    marginTop: '50px'
+                    marginTop: '51px'
                 }}>
                     {
                         data.map(section => (
@@ -132,10 +149,23 @@ const Kanban = props => {
                                                 fontWeight: "bold"
                                             }}>
                                                 <a>{section.title}</a>
+                                                <IconButton
+                                                    variant='outlined'
+                                                    size='small'
+                                                    sx={{
+                                                        display: 'flex',
+                                                        '&:hover': {color: 'green'}
+                                                    }}
+                                                    onClick={() => createTask(section.id)}
+                                                >
+                                                    <AddOutlinedIcon/>
+                                                </IconButton>
                                             </Box>
+
                                             {/* tasks */}
                                             {
                                                 section.tasks.map((task, index) => (
+
 
                                                     <Draggable key={task.id} draggableId={task.id} index={index}>
                                                         {(provided, snapshot) => (
@@ -144,30 +174,49 @@ const Kanban = props => {
                                                                 {...provided.draggableProps}
                                                                 {...provided.dragHandleProps}
                                                             >
+
                                                                 <Typography>
                                                                     <div className="board">
-                                                                        <div className="board-section" id="board-section">
+                                                                        <div className="board-section"
+                                                                             id="board-section">
                                                                             <div className='board_header'>
-                                                                                <a className="board-title">Автор: {task.author}<a
-                                                                                    className="board-text">{}</a></a>
-                                                                                <a className="board-title">{task.date}<a
-                                                                                    className="board-text">{}</a></a>
+                                                                                <a className="board-title">Автор: {task.author}</a>
+                                                                                <a className="board-title">{task.date}</a>
                                                                             </div>
                                                                             <div>
-                                                                                <a className="board-title">Клиент: {task.client}<a
-                                                                                    className="board-text">{}</a></a>
+                                                                                <a className="board-title">Клиент: {task.client}</a>
                                                                             </div>
                                                                             <div className="board_table_column">
-                                                                                <a className="board_column">Наименование {task.name}</a>
-                                                                                <a className="board_column">Марка {task.mark}</a>
-                                                                                <a className="board_column">Ширина {task.width}</a>
-                                                                                <a className="board_column">Длина {task.height}</a>
-                                                                                <a className="board_column">Кол-во {task.count}</a>
-                                                                                <a className="board_column">Чертёж {task.plan}</a>
+                                                                                <a className="board_column">Наименование
+                                                                                    <a className="board-text">{task.name}</a>
+                                                                                </a>
+                                                                                <a className="board_column">Марка
+                                                                                    <a className="board-text">{task.mark}</a>
+
+                                                                                </a>
+                                                                                <a className="board_column">Ширина
+                                                                                    <a className="board-text">{task.width}</a>
+
+                                                                                </a>
+                                                                                <a className="board_column">Длина
+                                                                                    <a className="board-text">{task.height}</a>
+
+                                                                                </a>
+                                                                                <a className="board_column">Кол-во
+                                                                                    <a className="board-text">{task.count}</a>
+
+                                                                                </a>
+                                                                                <a className="board_column">Чертёж
+                                                                                    <a className="board-text">{task.plan}</a>
+
+                                                                                </a>
+
+
                                                                             </div>
                                                                             <div className='podval'>
                                                                                 <a className="board-text"
-                                                                                   id="chBox"><input
+                                                                                   ><input
+                                                                                    id="chBox"
                                                                                     type="checkbox"
                                                                                     value={task.quickly}
                                                                                     checked={task.quickly}
@@ -196,6 +245,7 @@ const Kanban = props => {
                                                     </Draggable>
                                                 ))
                                             }
+
                                             {provided.placeholder}
                                         </Box>
                                     )}

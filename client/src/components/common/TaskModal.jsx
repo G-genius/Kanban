@@ -21,12 +21,13 @@ const modalStyle = {
 let timer
 const timeout = 500
 let isModalClosed = false
+let currentTime = new Date().toLocaleString("ru-RU", )
 
 const TaskModal = props => {
     const boardId = props.boardId
     const [task, setTask] = useState(props.task)
     const [author, setAuthor] = useState('')
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState()
     const [client, setClient] = useState('')
     const [quickly, setQuickly] = useState('')
     const [name, setName] = useState('')
@@ -36,6 +37,7 @@ const TaskModal = props => {
     const [count, setCount] = useState(0)
     const [plan, setPlan] = useState(false)
     const editorWrapperRef = useRef()
+
 
     useEffect(() => {
         setTask(props.task)
@@ -100,15 +102,15 @@ const TaskModal = props => {
         const newDate = e.target.value
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {date: newDate})
+                await taskApi.update(boardId, task.id, {date: currentTime})
             } catch (err) {
                 alert(err)
             }
         }, timeout)
 
-        task.date = newDate
-        setDate(newDate)
-        props.onUpdate(task)
+        task.date = currentTime
+        setDate(currentTime)
+        props.onUpdate(currentTime)
     }
     const updateClient = async (e) => {
         clearTimeout(timer)
@@ -227,18 +229,18 @@ const TaskModal = props => {
     const updateQiuckly = async (e) => {
 
 
-        let isChecked = document.getElementById('one')
+        let isChecked = document.getElementById('one').checked
 
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {quickly: isChecked.checked})
+                await taskApi.update(boardId, task.id, {quickly: isChecked})
             } catch (err) {
                 alert(err)
             }
         }, timeout)
 
 
-        console.log(isChecked.checked)
+        console.log(isChecked)
         // clearTimeout(timer)
         // const newQuickly = e.target.value
         // timer = setTimeout(async () => {
@@ -281,7 +283,7 @@ const TaskModal = props => {
                         onChange={updateAuthor}
                         placeholder='Автор'/>
                     <TextField
-                        value={date}
+                        value={currentTime}
                         onChange={updateDate}
                         placeholder='Дата создания'
                     />
