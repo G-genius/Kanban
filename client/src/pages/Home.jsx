@@ -5,7 +5,7 @@ import "../css/Main.css";
 const Home = () => {
     return (
             <div>
-                <KanbanBoard/>
+
             </div>
     )
 }
