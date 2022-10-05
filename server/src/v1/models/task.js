@@ -40,6 +40,9 @@ const taskSchema = new Schema({
     count: {
         type: Number
     },
+    planName: {
+        type: String
+    },
     plan: {
         type: String
     },

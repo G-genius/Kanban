@@ -37,7 +37,6 @@ const Sidebar = () => {
         for (let i = 0; i < task.length; i++) {
             if(i <= task.length) {
                 taskMark = task[i].mark
-                console.log(taskMark)
             }
         }
 

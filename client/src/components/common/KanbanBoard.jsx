@@ -85,21 +85,20 @@ const Kanban = props => {
         newData[sectionIndex].tasks.splice(taskIndex, 1)
         setData(newData)
     }
-    console.log(data)
-    const checkQuickly = () => {
-        if (quickly === true) {
-        document.getElementById('board-section').style.background = "red"
-        }
-        let status
-        for(let i = 0; i < data[0].tasks.length; i++){
-            status = data[0].tasks[i].quickly
-            console.log(status)
-            if (status === true) {
-                document.getElementById('board-section').style.background = "red"
-            }
-        }
-    }
-    //checkQuickly()
+    // const checkQuickly = () => {
+    //     if (quickly === true) {
+    //     document.getElementById('board-section').style.background = "red"
+    //     }
+    //     let status
+    //     for(let i = 0; i < data[0].tasks.length; i++){
+    //         status = data[0].tasks[i].quickly
+    //         console.log(status)
+    //         if (status === true) {
+    //             document.getElementById('board-section').style.background = "red"
+    //         }
+    //     }
+    // }
+    // //checkQuickly()
 
 
 

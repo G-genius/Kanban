@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import taskApi from '../../api/taskApi'
 import FileBase64 from 'react-filebase64';
-
+import { saveAs } from 'file-saver';
 
 const modalStyle = {
     outline: 'none',
@@ -37,6 +37,7 @@ const TaskModal = props => {
     const [height, setHeight] = useState(0)
     const [count, setCount] = useState(0)
     const [plan, setPlan] = useState('')
+    const [planName, setPlanName] = useState('')
     const editorWrapperRef = useRef()
 
 
@@ -52,6 +53,7 @@ const TaskModal = props => {
         setHeight(props.task !== undefined ? props.task.height : '')
         setCount(props.task !== undefined ? props.task.count : '')
         setPlan(props.task !== undefined ? props.task.plan : '')
+        setPlanName(props.task !== undefined ? props.task.planName : '')
         if (props.task !== undefined) {
             isModalClosed = false
 
@@ -214,17 +216,26 @@ const TaskModal = props => {
         // const newPlan = e.target.value
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {plan: base64.base64})
+                await taskApi.update(boardId, task.id, {plan: base64.base64, planName: base64.name})
             } catch (err) {
                 alert(err)
             }
         }, timeout)
 
         task.plan = base64.base64
+        task.planName = base64.name
         setPlan(base64.base64)
+        setPlanName(base64.name)
         props.onUpdate(base64.base64)
-        console.log(base64.base64)
+        console.log(base64)
+        console.log(task.plan)
     }
+
+    const downloadBase64Data = () => {
+        saveAs(task.plan);
+        console.log(task.plan)
+    }
+    console.log(planName)
 
 
 
@@ -253,7 +264,6 @@ const TaskModal = props => {
         setQuickly(isChecked)
         props.onUpdate(task)
 
-        console.log(isChecked)
 
         // clearTimeout(timer)
         // const newQuickly = e.target.value
@@ -269,6 +279,8 @@ const TaskModal = props => {
 
 
     }
+
+
 
 
 
@@ -336,21 +348,29 @@ const TaskModal = props => {
                     {/*    onChange={updatePlan}*/}
                     {/*    placeholder='Чертёж'*/}
                     {/*/>*/}
+                    <div className="chekBox">
+                        <label className="labelCh">СРОЧНО</label>
+                        <input
+                            type="checkbox"
+                            id="one"
+                            onChange={updateQiuckly}
+                            placeholder='Срочно'
+                            value={quickly}
+                        />
+                    </div>
                     <br/>
-                    <a>План</a>
+                    <div>
+                        <a>Название файла: { planName } </a>
+                        <button onClick={downloadBase64Data}>Скачать</button>
+
+                    </div>
                     <FileBase64
                         multiple={ false }
                         onDone={updatePlan} />
-                    <input
-                        type="checkbox"
-                        id="one"
-                        onChange={updateQiuckly}
-                        placeholder='Срочно'
-                        value={quickly}
-                    />
+
+
                     <div >
-                        <img src={plan} />
-                        <button></button>
+                        <img src={plan} width="400px" height="250px"/>
                     </div>
                 </Box>
             </Fade>
