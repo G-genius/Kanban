@@ -6,6 +6,7 @@ import sectionApi from '../../api/sectionApi'
 import taskApi from '../../api/taskApi'
 import TaskModal from './TaskModal'
 import '../../css/Main.css';
+import '../../css/Card.css'
 
 
 const Kanban = props => {
@@ -64,6 +65,7 @@ const Kanban = props => {
             const index = newData.findIndex(e => e.id === sectionId)
             newData[index].tasks.unshift(task)
             setData(newData)
+            setSelectedTask(task)
         } catch (err) {
             alert(err)
         }
@@ -178,6 +180,7 @@ const Kanban = props => {
                                                                 ref={provided.innerRef}
                                                                 {...provided.draggableProps}
                                                                 {...provided.dragHandleProps}
+                                                                className="card-item"
                                                             >
 
                                                                 <Typography>
@@ -212,10 +215,7 @@ const Kanban = props => {
 
                                                                                 </a>
                                                                                 <a className="board_column">Чертёж
-                                                                                    <a className="board-text">{task.plan}</a>
-                                                                                </a>
-                                                                                <a className="board_column">Срочно
-                                                                                    <a className="board-text">{task.quickly}</a>
+                                                                                    <a className="board-text">{task.planName}</a>
                                                                                 </a>
 
 

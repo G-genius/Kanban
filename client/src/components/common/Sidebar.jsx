@@ -102,15 +102,15 @@ const Sidebar = () => {
                 <a className="user-name">Пользователь:
                     <a> {user.username} </a>
                 </a>
-                <input
-                    value={searchTermin}
-                    autoFocus
-                    type="text"
-                    autoComplete="off"
-                    placeholder="Поиск по марке"
+                {/*<input*/}
+                {/*    value={searchTermin}*/}
+                {/*    autoFocus*/}
+                {/*    type="text"*/}
+                {/*    autoComplete="off"*/}
+                {/*    placeholder="Поиск по марке"*/}
 
-                    onChange={(e) => {setSearchTermin(e.target.value)}}
-                />
+                {/*    onChange={(e) => {setSearchTermin(e.target.value)}}*/}
+                {/*/>*/}
                 <button className="exit-btn" onClick={exitBtn}>Выйти</button>
             </div>
 

@@ -1,9 +1,12 @@
 import {Backdrop, Fade, IconButton, Modal, Box, TextField} from '@mui/material'
 import React, {useEffect, useRef, useState} from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
+import CloseIcon from '@mui/icons-material/Close';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
 import taskApi from '../../api/taskApi'
 import FileBase64 from 'react-filebase64';
 import { saveAs } from 'file-saver';
+import "../../css/style.css"
 
 const modalStyle = {
     outline: 'none',
@@ -235,7 +238,6 @@ const TaskModal = props => {
         saveAs(task.plan);
         console.log(task.plan)
     }
-    console.log(planName)
 
 
 
@@ -248,11 +250,11 @@ const TaskModal = props => {
             try {
                 if (isChecked === true) {
                     await taskApi.update(boardId, task.id, {quickly: isChecked})
-                    document.getElementById('board-section').style.background = "red"
+                    //document.getElementById('board-section').style.background = "red"
                 }
                 else if (isChecked === false){
                     await taskApi.update(boardId, task.id, {quickly: isChecked})
-                    document.getElementById('board-section').style.background = "#B6B2B2"
+                    //document.getElementById('board-section').style.background = "#B6B2B2"
                 }
 
             } catch (err) {
@@ -275,15 +277,7 @@ const TaskModal = props => {
         //     }
         // }, timeout)
         //
-
-
-
     }
-
-
-
-
-
     return (
         <Modal
             open={task !== undefined}
@@ -293,61 +287,17 @@ const TaskModal = props => {
             BackdropProps={{timeout: 500}}
         >
             <Fade in={task !== undefined}>
-                <Box sx={modalStyle}>
+                <Box sx={modalStyle} className="board-item">
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
                         width: '100%'
                     }}>
-                        <IconButton variant='outlined' color='error' onClick={deleteTask}>
-                            <DeleteOutlinedIcon/>
+                        <IconButton variant='outlined' color='error' onClick={onClose}>
+                            <CloseIcon/>
                         </IconButton>
                     </Box>
-                    <TextField
-                        value={author}
-                        onChange={updateAuthor}
-                        placeholder='Автор'/>
-                    <TextField
-                        value={currentTime}
-                        onChange={updateDate}
-                        placeholder='Дата создания'
-                    />
-                    <TextField
-                        value={client}
-                        onChange={updateClient}
-                        placeholder='Клиент'
-                    />
-                    <TextField
-                        value={name}
-                        onChange={updateName}
-                        placeholder='Наименование'
-                    />
-                    <TextField
-                        value={mark}
-                        onChange={updateMark}
-                        placeholder='Марка'
-                    />
-                    <TextField
-                        value={width}
-                        onChange={updateWidth}
-                        placeholder='Ширина заготовки'
-                    />
-                    <TextField
-                        value={height}
-                        onChange={updateHeight}
-                        placeholder='Длина заготовки'
-                    />
-                    <TextField
-                        value={count}
-                        onChange={updateCount}
-                        placeholder='Кол-во'
-                    />
-                    {/*<TextField*/}
-                    {/*    value={plan}*/}
-                    {/*    onChange={updatePlan}*/}
-                    {/*    placeholder='Чертёж'*/}
-                    {/*/>*/}
                     <div className="chekBox">
                         <label className="labelCh">СРОЧНО</label>
                         <input
@@ -358,22 +308,98 @@ const TaskModal = props => {
                             value={quickly}
                         />
                     </div>
-                    <br/>
-                    <div>
-                        <a>Название файла: { planName } </a>
-                        <button onClick={downloadBase64Data}>Скачать</button>
+                        <div className="fields">
+                            <div className="field">
+                                <p>Автор</p>
+                                <TextField
+                                    value={author}
+                                    onChange={updateAuthor}
+                                    placeholder='Автор'/>
+                                <p>Дата создания</p>
+                                <TextField
+                                    value={currentTime}
+                                    onChange={updateDate}
+                                    placeholder='Дата создания'
+                                />
+                                <p>Клиент</p>
+                                <TextField
+                                    value={client}
+                                    onChange={updateClient}
+                                    placeholder='Клиент'
+                                />
+                                <p>Наименование</p>
+                                <TextField
+                                    value={name}
+                                    onChange={updateName}
+                                    placeholder='Наименование'
+                                />
+                            </div>
+                            <div className="field">
+                                <p>Марка</p>
+                                <TextField
+                                    value={mark}
+                                    onChange={updateMark}
+                                    placeholder='Марка'
+                                />
+                                <p>Ширина заготовки</p>
+                                <TextField
+                                    value={width}
+                                    onChange={updateWidth}
+                                    placeholder='Ширина заготовки'
+                                />
+                                <p>Длина заготовки</p>
+                                <TextField
+                                    value={height}
+                                    onChange={updateHeight}
+                                    placeholder='Длина заготовки'
+                                />
+                                <p>Кол-во</p>
+                                <TextField
+                                    value={count}
+                                    onChange={updateCount}
+                                    placeholder='Кол-во'
+                                />
+                            </div>
 
-                    </div>
-                    <FileBase64
-                        multiple={ false }
-                        onDone={updatePlan} />
+                            <div className="field">
+                                <FileBase64
+                                    multiple={ false }
+                                    onDone={updatePlan} />
+                                <img src={plan} className="img-filebase"/>
 
+                                <div>
+                                    <a>Название файла: { planName } </a>
+                                    <button onClick={downloadBase64Data}>Скачать</button>
 
-                    <div >
-                        <img src={plan} width="400px" height="250px"/>
+                                </div>
+                            </div>
+                        </div>
+                    {/*<TextField*/}
+                    {/*    value={plan}*/}
+                    {/*    onChange={updatePlan}*/}
+                    {/*    placeholder='Чертёж'*/}
+                    {/*/>*/}
+
+                    <div className="buttons-icons">
+                        <div className="buttons-bottom">
+                            <div className="delete-btn">
+                                <IconButton variant='outlined' color='error' onClick={onClose} >
+                                    <DeleteOutlinedIcon/>
+                                </IconButton>
+                            </div>
+
+                            <div className="save-btn">
+                                <IconButton variant='outlined' color='error' onClick={onClose} >
+                                    <SaveAsIcon/>
+                                </IconButton>
+                            </div>
+                        </div>
+
                     </div>
                 </Box>
+
             </Fade>
+
         </Modal>
     )
 }
