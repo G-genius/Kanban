@@ -383,7 +383,7 @@ const TaskModal = props => {
                     <div className="buttons-icons">
                         <div className="buttons-bottom">
                             <div className="delete-btn">
-                                <IconButton variant='outlined' color='error' onClick={onClose} >
+                                <IconButton variant='outlined' color='error' onClick={deleteTask} >
                                     <DeleteOutlinedIcon/>
                                 </IconButton>
                             </div>

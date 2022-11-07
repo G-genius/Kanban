@@ -1,6 +1,6 @@
 .kanban_board {
     display: flex;
-    margin: 0 auto;
+    margin: 0 10px 0 10px;
 }
 
 .podval {
