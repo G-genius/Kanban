@@ -14,7 +14,7 @@ const Kanban = props => {
     const [data, setData] = useState([])
     const [quickly, setQuickly] = useState(false)
     const [selectedTask, setSelectedTask] = useState(undefined)
-    
+
 
     useEffect(() => {
         setData(props.data)
@@ -181,6 +181,7 @@ const Kanban = props => {
                                                                 {...provided.draggableProps}
                                                                 {...provided.dragHandleProps}
                                                                 className="card-item"
+                                                                onClick={() => setSelectedTask(task)}
                                                             >
 
                                                                 <Typography>

@@ -8,6 +8,7 @@ import FileBase64 from 'react-filebase64';
 import { saveAs } from 'file-saver';
 import "../../css/style.css"
 
+
 const modalStyle = {
     outline: 'none',
     position: 'absolute',
@@ -26,6 +27,8 @@ let timer
 const timeout = 500
 let isModalClosed = false
 let currentTime = new Date().toLocaleString("ru-RU", )
+
+
 
 const TaskModal = props => {
     const boardId = props.boardId
@@ -77,6 +80,22 @@ const TaskModal = props => {
         isModalClosed = true
         props.onUpdate(task)
         props.onClose()
+        let time = setInterval(function() {
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {date: currentTime})
+            } catch (err) {
+                alert(err)
+            }
+        }, timeout)
+
+        task.date = currentTime
+        setDate(currentTime)
+        props.onUpdate(currentTime)
+        }, 1000);
+        task.date = currentTime
+        setDate(currentTime)
+        props.onUpdate(currentTime)
     }
 
     const deleteTask = async () => {
@@ -116,7 +135,8 @@ const TaskModal = props => {
 
         task.date = currentTime
         setDate(currentTime)
-        props.onUpdate(currentTime)
+        props.onUpdate(newDate)
+
     }
     const updateClient = async (e) => {
         clearTimeout(timer)
@@ -317,6 +337,7 @@ const TaskModal = props => {
                                     placeholder='Автор'/>
                                 <p>Дата создания</p>
                                 <TextField
+                                    className="card-date"
                                     value={currentTime}
                                     onChange={updateDate}
                                     placeholder='Дата создания'
