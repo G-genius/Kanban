@@ -203,14 +203,10 @@ const Kanban = props => {
                                                                                     <a className="board-text">{task.mark}</a>
 
                                                                                 </a>
-                                                                                <a className="board_column">Ширина
-                                                                                    <a className="board-text">{task.width}</a>
-
+                                                                                <a className="board_column">ШхД заг
+                                                                                    <a className="board-text">{task.width} {task.height}</a>
                                                                                 </a>
-                                                                                <a className="board_column">Длина
-                                                                                    <a className="board-text">{task.height}</a>
 
-                                                                                </a>
                                                                                 <a className="board_column">Кол-во
                                                                                     <a className="board-text">{task.count}</a>
 
@@ -236,18 +232,7 @@ const Kanban = props => {
                                                                         </div>
                                                                     </div>
                                                                 </Typography>
-                                                                <IconButton
-                                                                    variant='outlined'
-                                                                    size='small'
-                                                                    sx={{
-                                                                        display: 'flex',
-                                                                        margin: '0 auto',
-                                                                        '&:hover': {color: 'green'}
-                                                                    }}
-                                                                    onClick={() => createTask(section.id)}
-                                                                >
-                                                                    <AddOutlinedIcon/>
-                                                                </IconButton>
+
                                                             </Card>
                                                         )}
                                                     </Draggable>

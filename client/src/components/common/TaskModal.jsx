@@ -405,12 +405,14 @@ const TaskModal = props => {
                         <div className="buttons-bottom">
                             <div className="delete-btn">
                                 <IconButton variant='outlined' color='error' onClick={deleteTask} >
+                                    Удалить
                                     <DeleteOutlinedIcon/>
                                 </IconButton>
                             </div>
 
                             <div className="save-btn">
                                 <IconButton variant='outlined' color='error' onClick={onClose} >
+                                    Сохранить
                                     <SaveAsIcon/>
                                 </IconButton>
                             </div>
