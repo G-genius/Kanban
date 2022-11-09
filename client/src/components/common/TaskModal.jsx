@@ -235,38 +235,23 @@ const downloadBase64Data = () => {
 };
 
 const updateQiuckly = async (e) => {
-    let isChecked = window.document.body.getElementsByTagName("chechnya");
-    let isCheckedTrue = document.getElementById("one").checked;
+    let isChecked = document.getElementById("one").checked;
 
     timer = setTimeout(async () => {
         try {
-            if (isCheckedTrue === true) {
-                await taskApi.update(boardId, task.id, {quickly: isCheckedTrue});
-                //document.querySelector('.board-section').style.background = "red"
-
-            } else if (isCheckedTrue === false) {
-                await taskApi.update(boardId, task.id, {quickly: isCheckedTrue});
-                //document.querySelector('.board-section').style.background = "#B6B2B2"
+            if (isChecked === true) {
+                await taskApi.update(boardId, task.id, {quickly: isChecked});
+                //document.getElementById('board-section').style.background = "red"
+            } else if (isChecked === false) {
+                await taskApi.update(boardId, task.id, {quickly: isChecked});
+                //document.getElementById('board-section').style.background = "#B6B2B2"
             }
-            // for(let i = 0; i<isChecked.length;i++){
-            //     if (isChecked[i].checked == true){
-            //         document.querySelector('.board-section').style.background = "red"
-            //         //console.log(isChecked[i].checked)
-            //     }
-            //     else if(isChecked[i].checked == false){
-            //         document.querySelector('.board-section').style.background = "#B6B2B2"
-            //     }
-            //     console.log(isChecked[i].type=="checkbox")
-            //     //if (isChecked[i].type=="checkbox")
-            // }
-            //console.log(isChecked.length)
-
         } catch (err) {
             alert(err);
         }
     }, timeout);
-    task.quickly = isCheckedTrue;
-    setQuickly(isCheckedTrue);
+    task.quickly = isChecked;
+    setQuickly(isChecked);
     props.onUpdate(task);
 
     // clearTimeout(timer)
@@ -281,13 +266,13 @@ const updateQiuckly = async (e) => {
     //
 };
 
-
 let currentTime = new Date().toLocaleString("ru-RU",)
 let lastDate = setInterval(
     function () {
         let newDate = new Date().toLocaleString("ru-RU",)
         setCurrentDate(newDate)
     }, 1000);
+    console.log(currentTime)
     clearInterval(lastDate)
 
 
@@ -396,7 +381,6 @@ const onSave = () => {
                                     <input
                                         type="checkbox"
                                         id="one"
-                                        className="chechnya"
                                         onChange={updateQiuckly}
                                         placeholder="Срочно"
                                         value={quickly}
