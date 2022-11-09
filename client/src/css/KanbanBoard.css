@@ -55,19 +55,18 @@
 }
 
 #one {
-	width: 50px;
+	width: 15px;
 }
 .labelCh {
 	display: flex;
 	align-items: center;
 	margin-top: 15px;
+	margin-left: 7px;
 }
 .chekBox {
 	width: 65px;
 	margin-left: 25px;
 	display: flex;
-}
-.buttons-icons {
 }
 .buttons-bottom {
 	display: flex;

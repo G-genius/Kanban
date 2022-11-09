@@ -4,7 +4,10 @@
 }
 .field {
 	display: flex;
-	margin: 0px 30px 15px 35px;
+	margin: 0px 30px 0px 35px;
+}
+.item p {
+	font-weight: bold;
 }
 
 .otstup {
@@ -37,13 +40,27 @@
 }
 
 .color {
-	border: 1px solid black;
+	border: 2px solid black;
 	border-radius: 1px;
 	height: 30px;
+	background-color: #D9D9D9;
 }
+.color_1 {
+	border: none;
+	background-color: transparent;
+}
+
 .item {
 	margin-left: 10px;
 }
 .otstup_2 {
-	margin-left: 130px;
+	margin-left: 120px;
+}
+.btn_low {
+	width: auto;
+	background-color: #D9D9D9;
+}
+
+.btn_up {
+	margin-top: -60px;
 }

@@ -23,11 +23,11 @@ const modalStyle = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "70%",
-    bgcolor: "background.paper",
+    bgcolor: "#B6B2B2",
     border: "0px solid #000",
     boxShadow: 24,
     p: 1,
-    height: "80%",
+    height: "450px",
 };
 
 let timer;
@@ -331,7 +331,7 @@ const onSave = () => {
                             width: "100%",
                         }}
                     >
-                        <IconButton variant="outlined" color="error" onClick={onClose}>
+                        <IconButton variant="outlined" onClick={onClose}>
                             <CloseIcon/>
                         </IconButton>
                     </Box>
@@ -344,7 +344,7 @@ const onSave = () => {
                                 <input
                                     className="color"
                                     value={author}
-                                    onClick={updateAuthor}
+                                    onChange={updateAuthor}
                                     placeholder="Автор"
                                 />
                             </div>
@@ -354,12 +354,10 @@ const onSave = () => {
                                 <p>Создан</p>
                             </div>
                             <div className="field_item otstup">
-                                <input
-                                    className="color"
-                                    value={currentTime}
-                                    onChange={updateDate}
-                                    placeholder="Дата создания"
-                                />
+                                <p className="color color_1">{currentTime}</p>
+                                    
+
+
                             </div>
                         </div>
                     </div>
@@ -380,9 +378,6 @@ const onSave = () => {
                         <div className="field">
                             <div className="chekBox">
                                 <div className="field_item">
-                                    <label className="labelCh">СРОЧНО</label>
-                                </div>
-                                <div className="field_item">
                                     <input
                                         type="checkbox"
                                         id="one"
@@ -390,6 +385,9 @@ const onSave = () => {
                                         placeholder="Срочно"
                                         value={quickly}
                                     />
+                                </div>
+                                    <div className="field_item">
+                                    <label className="labelCh">Срочно</label>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +428,7 @@ const onSave = () => {
                                     </div>
                                 </div>
                                 <div className="field_list otstup">
-                                    <div className="item">
+                                    <div className="item btn_up">
                                         <FileBase64 multiple={false} onDone={updatePlan}/>
                                     </div>
                                 </div>
@@ -499,21 +497,17 @@ const onSave = () => {
                     <div className="buttons-icons">
                         <div className="buttons-bottom">
                             <div className="delete-btn">
-                                <IconButton
-                                    variant="outlined"
-                                    color="error"
+                                <button className="btn btn_low"
                                     onClick={deleteTask}
                                 >
-                                    Удалить
-                                    <DeleteOutlinedIcon/>
-                                </IconButton>
+                                    Удалить карточку
+                                </button>
                             </div>
 
                             <div className="save-btn">
-                                <IconButton variant="outlined" color="error" onClick={onSave}>
+                                <button className="btn btn_low" onClick={onSave}>
                                     Сохранить
-                                    <SaveAsIcon/>
-                                </IconButton>
+                                </button>
                             </div>
                         </div>
                     </div>

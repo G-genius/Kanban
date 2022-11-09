@@ -32,7 +32,6 @@ body {
 input {
 	height: 25px;
 	margin-top: 10px;
-	border: 1px solid white;
 	border-radius: 10px;
 }
 
@@ -56,15 +55,17 @@ input {
 	margin-top: 10px;
 }
 .board-item {
-	width: 80%;
-	height: 600px;
+    width: 75%;
+    height: 510px;
 }
 
 .img-filebase {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 400px;
-	height: 200px;
+	width: 359px;
+	height: 181px;
 	object-fit: scale-down;
+	border: 2px solid black;
+	margin-top: -30px;
 }
