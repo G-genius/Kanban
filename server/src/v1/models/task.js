@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const {schemaOptions} = require('./modelOptions')
 
-let currentTime = new Date().toLocaleString("ru-RU", )
-let currentDate = new Date()
-let currentYear = new Date()
-
 const taskSchema = new Schema({
     section: {
         type: Schema.Types.ObjectId,
@@ -24,27 +20,6 @@ const taskSchema = new Schema({
     quickly: {
         type: Boolean,
         default: false
-    },
-    name: {
-        type: String
-    },
-    mark: {
-        type: String
-    },
-    width: {
-        type: Number
-    },
-    height: {
-        type: Number
-    },
-    count: {
-        type: Number
-    },
-    planName: {
-        type: String
-    },
-    plan: {
-        type: String
     },
     position: {
         type: Number

@@ -71,192 +71,201 @@ const Kanban = props => {
         }
     }
 
-    const onUpdateTask = (task) => {
-        const newData = [...data]
-        const sectionIndex = newData.findIndex(e => e.id === task.section.id)
-        const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
-        newData[sectionIndex].tasks[taskIndex] = task
-        setData(newData)
 
-
-    }
-    const onDeleteTask = (task) => {
-        const newData = [...data]
-        const sectionIndex = newData.findIndex(e => e.id === task.section.id)
-        const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
-        newData[sectionIndex].tasks.splice(taskIndex, 1)
-        setData(newData)
-    }
-    // const checkQuickly = () => {
-    //     if (quickly === true) {
-    //     document.getElementById('board-section').style.background = "red"
-    //     }
-    //     let status
-    //     for(let i = 0; i < data[0].tasks.length; i++){
-    //         status = data[0].tasks[i].quickly
-    //         console.log(status)
-    //         if (status === true) {
-    //             document.getElementById('board-section').style.background = "red"
+const onUpdateTask = (task) => {
+    const newData = [...data]
+    const sectionIndex = newData.findIndex(e => e.id === task.section.id)
+    const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
+    newData[sectionIndex].tasks[taskIndex] = task
+    setData(newData)
+    // let selectedTask = document.getElementsByClassName(".board")
+    // let isCheckedTrue = document.getElementById("one").checked;
+    // for (let i = 0; i < newData.length; i++) {
+    //     //console.log(newData[i].tasks)
+    //     for (let j = 0; j < newData[i].tasks.length; j++) {
+    //         if (newData[i].tasks[j].quickly == true) {
+    //             document.querySelector('.board-section').style.background = "red"
     //         }
+    //
     //     }
     // }
-    // //checkQuickly()
 
 
+}
+const onDeleteTask = (task) => {
+    const newData = [...data]
+    const sectionIndex = newData.findIndex(e => e.id === task.section.id)
+    const taskIndex = newData[sectionIndex].tasks.findIndex(e => e.id === task.id)
+    newData[sectionIndex].tasks.splice(taskIndex, 1)
+    setData(newData)
+}
+// const checkQuickly = () => {
+//     if (quickly === true) {
+//     document.getElementById('board-section').style.background = "red"
+//     }
+//     let status
+//     for(let i = 0; i < data[0].tasks.length; i++){
+//         status = data[0].tasks[i].quickly
+//         console.log(status)
+//         if (status === true) {
+//             document.getElementById('board-section').style.background = "red"
+//         }
+//     }
+// }
+// //checkQuickly()
 
-    /*const onChangeCheckBox = () => {
-    let status = document.querySelectorAll('chBox')
-         if (isChecked.checked == true) {
-        
-          }
-        document.getElementById('board-section').style.background = "red"
-        console.log(status.value)
-     }
-    onChangeCheckBox()*/
 
-    return (
-        <div className="kanban-board">
+/*const onChangeCheckBox = () => {
+let status = document.querySelectorAll('chBox')
+     if (isChecked.checked == true) {
+
+      }
+    document.getElementById('board-section').style.background = "red"
+    console.log(status.value)
+ }
+onChangeCheckBox()*/
+
+return (
+    <div className="kanban-board">
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        }}>
+
+        </Box>
+        <Divider sx={{margin: '10px 0'}}/>
+        <DragDropContext onDragEnd={onDragEnd}>
             <Box sx={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                alignItems: 'flex-start',
+                overflowX: 'auto',
+                marginTop: '51px'
             }}>
+                {
+                    data.map(section => (
 
-            </Box>
-            <Divider sx={{margin: '10px 0'}}/>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    overflowX: 'auto',
-                    marginTop: '51px'
-                }}>
-                    {
-                        data.map(section => (
+                        <div key={section.id} style={{width: '600px'}}>
+                            <Droppable key={section.id} droppableId={section.id}>
+                                {(provided) => (
+                                    <Box
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                        sx={{
+                                            width: '560px',
+                                            padding: '10px',
+                                            marginRight: '30px',
+                                            background: "#D9D9D9",
+                                            minHeight: "584px"
+                                        }}
+                                    >
+                                        <Box sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            padding: '10px',
+                                            fontWeight: "bold"
+                                        }}>
+                                            <a>{section.title}</a>
+                                            <IconButton
+                                                variant='outlined'
+                                                size='small'
+                                                sx={{
+                                                    display: 'flex',
+                                                    '&:hover': {color: 'green'}
+                                                }}
+                                                onClick={() => createTask(section.id)}
+                                            >
+                                                <AddOutlinedIcon/>
+                                            </IconButton>
+                                        </Box>
 
-                            <div key={section.id} style={{width: '600px'}}>
-                                <Droppable key={section.id} droppableId={section.id}>
-                                    {(provided) => (
-                                        <Box
-                                            ref={provided.innerRef}
-                                            {...provided.droppableProps}
-                                            sx={{
-                                                width: '560px',
-                                                padding: '10px',
-                                                marginRight: '30px',
-                                                background: "#D9D9D9",
-                                                minHeight: "584px"
-                                            }}
-                                        >
-                                            <Box sx={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'space-between',
-                                                padding: '10px',
-                                                fontWeight: "bold"
-                                            }}>
-                                                <a>{section.title}</a>
-                                                <IconButton
-                                                    variant='outlined'
-                                                    size='small'
-                                                    sx={{
-                                                        display: 'flex',
-                                                        '&:hover': {color: 'green'}
-                                                    }}
-                                                    onClick={() => createTask(section.id)}
-                                                >
-                                                    <AddOutlinedIcon/>
-                                                </IconButton>
-                                            </Box>
-
-                                            {/* tasks */}
-                                            {
-                                                section.tasks.map((task, index) => (
+                                        {/* tasks */}
+                                        {
+                                            section.tasks.map((task, index) => (
 
 
-                                                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                                                        {(provided, snapshot) => (
-                                                            <Card
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                                className="card-item"
-                                                                onClick={() => setSelectedTask(task)}
-                                                            >
+                                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <Card
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            className="card-item"
+                                                            onClick={() => setSelectedTask(task)}
+                                                        >
 
-                                                                <Typography>
-                                                                    <div className="board">
-                                                                        <div className="board-section"
-                                                                             id="board-section">
-                                                                            <div className='board_header'>
-                                                                                <a className="board-title">Автор: {task.author}</a>
-                                                                                <a className="board-title">{task.date}</a>
-                                                                            </div>
-                                                                            <div>
-                                                                                <a className="board-title">Клиент: {task.client}</a>
-                                                                            </div>
-                                                                            <div className="board_table_column">
-                                                                                <a className="board_column">Наименование
-                                                                                    <a className="board-text">{task.name}</a>
-                                                                                </a>
-                                                                                <a className="board_column">Марка
-                                                                                    <a className="board-text">{task.mark}</a>
+                                                            <Typography>
+                                                                <div className="board">
+                                                                    <div className="board-section"
+                                                                         id="red">
+                                                                        <div className='board_header'>
+                                                                            <a className="board-title">Автор: {task.author}</a>
+                                                                            <a className="board-title">{task.date}</a>
+                                                                        </div>
+                                                                        <div>
+                                                                            <a className="board-title">Клиент: {task.client}</a>
+                                                                        </div>
+                                                                        <div className="board_table_column">
+                                                                            <a className="board_column">Наименование
+                                                                                <a className="board-text">{task.name}</a>
+                                                                            </a>
+                                                                            <a className="board_column">Марка
+                                                                                <a className="board-text">{task.mark}</a>
 
-                                                                                </a>
-                                                                                <a className="board_column">ШхД заг
-                                                                                    <a className="board-text">{task.width} {task.height}</a>
-                                                                                </a>
+                                                                            </a>
+                                                                            <a className="board_column">ШхД заг
+                                                                                <a className="board-text">{task.width} {task.height}</a>
+                                                                            </a>
 
-                                                                                <a className="board_column">Кол-во
-                                                                                    <a className="board-text">{task.count}</a>
+                                                                            <a className="board_column">Кол-во
+                                                                                <a className="board-text">{task.count}</a>
 
-                                                                                </a>
-                                                                                <a className="board_column">Чертёж
-                                                                                    <a className="board-text">{task.planName}</a>
-                                                                                </a>
-
-
-                                                                            </div>
-                                                                            <div className='podval'>
-                                                                                <a className="board-text"
-                                                                                   ><input
-                                                                                    id="chBox"
-                                                                                    type="checkbox"
-                                                                                    value={task.quickly}
-                                                                                    checked={task.quickly}
-                                                                                    className="board-title"/>Срочно</a>
-                                                                                <button className='redactir'
-                                                                                        onClick={() => setSelectedTask(task)}>Редактировать
-                                                                                </button>
-                                                                            </div>
+                                                                            </a>
+                                                                            <a className="board_column">Чертёж
+                                                                                <a className="board-text">{task.planName}</a>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div className='podval'>
+                                                                            <a className="board-text"
+                                                                            ><input
+                                                                                id="chBox"
+                                                                                type="checkbox"
+                                                                                value={task.quickly}
+                                                                                checked={task.quickly}
+                                                                                className="board-title"/>Срочно</a>
+                                                                            <button className='redactir'
+                                                                                    onClick={() => setSelectedTask(task)}>Редактировать
+                                                                            </button>
                                                                         </div>
                                                                     </div>
-                                                                </Typography>
+                                                                </div>
+                                                            </Typography>
 
-                                                            </Card>
-                                                        )}
-                                                    </Draggable>
-                                                ))
-                                            }
+                                                        </Card>
+                                                    )}
+                                                </Draggable>
+                                            ))
+                                        }
 
-                                            {provided.placeholder}
-                                        </Box>
-                                    )}
-                                </Droppable>
-                            </div>
-                        ))
-                    }
-                </Box>
-            </DragDropContext>
-            <TaskModal
-                task={selectedTask}
-                boardId={boardId}
-                onClose={() => setSelectedTask(undefined)}
-                onUpdate={onUpdateTask}
-                onDelete={onDeleteTask}
-            />
-        </div>
-    )
+                                        {provided.placeholder}
+                                    </Box>
+                                )}
+                            </Droppable>
+                        </div>
+                    ))
+                }
+            </Box>
+        </DragDropContext>
+        <TaskModal
+            task={selectedTask}
+            boardId={boardId}
+            onClose={() => setSelectedTask(undefined)}
+            onUpdate={onUpdateTask}
+            onDelete={onDeleteTask}
+        />
+    </div>
+)
 
 }
 
