@@ -1,0 +1,49 @@
+.fields {
+	display: flex;
+	position: relative;
+}
+.field {
+	display: flex;
+	margin: 0px 30px 15px 35px;
+}
+
+.otstup {
+	display: flex;
+	margin-left: 20px;
+}
+.field:nth-child(3) {
+	margin-left: 40px;
+}
+
+.text_field {
+	width: 300px;
+}
+.otstup_1 {
+	margin-left: 45px;
+}
+.btn {
+	width: 30px;
+	height: 30px;
+	margin-left: 20px;
+	margin-top: 11px;
+}
+
+.size_1 {
+	width: 220px;
+}
+
+.size_2 {
+	width: 55px;
+}
+
+.color {
+	border: 1px solid black;
+	border-radius: 1px;
+	height: 30px;
+}
+.item {
+	margin-left: 10px;
+}
+.otstup_2 {
+	margin-left: 130px;
+}

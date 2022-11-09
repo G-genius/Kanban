@@ -1,83 +1,81 @@
 .kanban_board {
-    display: flex;
-    margin: 0 10px 0 10px;
+	display: flex;
+	margin: 0 10px 0 10px;
 }
 
 .podval {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .redactir {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .board_header {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .board-text {
-    display: flex;
-    align-items: center;
-    font-weight: normal;
+	display: flex;
+	align-items: center;
+	font-weight: normal;
 }
 
-.board-section{
-    background: #B6B2B2;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    width: 550px;
+.board-section {
+	background: #b6b2b2;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	width: 550px;
 }
 .board-title {
-    font-weight: bold;
-    margin-bottom: 6px;
+	font-weight: bold;
+	margin-bottom: 6px;
 }
 .board-table {
-    font-weight: bold;
-    margin-right: 10px;
+	font-weight: bold;
+	margin-right: 10px;
 }
 
 .scroll-bar {
-    display: flex;
-    width: 1300px;
-    overflow-x: auto;
-    white-space: nowrap;
+	display: flex;
+	width: 1300px;
+	overflow-x: auto;
+	white-space: nowrap;
 }
-
 
 .board_column {
-    margin-right: 20px;
-    font-weight: bold;
-
+	margin-right: 20px;
+	font-weight: bold;
 }
 .board_table_column {
-    display: flex;
-
+	display: flex;
 }
 
 #one {
-    width: 50px;
+	width: 50px;
 }
 .labelCh {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
 }
 .chekBox {
-    width: 65px;
+	width: 65px;
+	margin-left: 25px;
+	display: flex;
 }
 .buttons-icons {
-
 }
 .buttons-bottom {
-    display: flex;
-    justify-content: space-between;
-
+	display: flex;
+	justify-content: space-between;
 }
 .delete-btn {
-    display: flex;
+	display: flex;
 }
 .save-btn {
-    display: flex;
+	display: flex;
 }
