@@ -98,7 +98,6 @@ const TaskModal = (props) => {
             updateEditorHeight();
         }
     }, [props.task]);
-
     const updateEditorHeight = () => {
         setTimeout(() => {
             if (editorWrapperRef.current) {
@@ -106,8 +105,12 @@ const TaskModal = (props) => {
                 box.querySelector(".ck-editor__editable_inline").style.height =
                     box.offsetHeight - 50 + "px";
             }
+
         }, timeout);
+
     };
+
+
 
 
     const deleteTask = async () => {
@@ -133,6 +136,20 @@ const TaskModal = (props) => {
         task.author = newAuthor;
         setAuthor(newAuthor);
         props.onUpdate(task);
+
+
+
+        // if (task.name2 != undefined) {
+        //     setTimeout(() => {
+        //         for ( let i = 0; i < 1000; i++ ) {
+        //             document.querySelector(".addFieldBtn").click();
+        //         }
+        //         for ( let i = 0; i < 1000; i++ ) {
+        //             document.querySelector(".addBtn2").click();
+        //         }
+        //
+        //     },1000)
+        // }
     };
 
 
@@ -231,7 +248,8 @@ const TaskModal = (props) => {
         props.onUpdate(currentTime);
     }
     // clearInterval(lastDate)
-    const updateName = async (e) => {
+    const updateName = async (e,id) => {
+
         clearTimeout(timer);
         const newName = e.target.value;
         timer = setTimeout(async () => {
@@ -259,6 +277,21 @@ const TaskModal = (props) => {
 
         task.name2 = newName;
         setName2(newName);
+        props.onUpdate(task);
+    };
+    const updateName3 = async (e) => {
+        clearTimeout(timer);
+        const newName = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name3: newName});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.name3 = newName;
+        setName3(newName);
         props.onUpdate(task);
     };
 
@@ -292,6 +325,21 @@ const TaskModal = (props) => {
         setMark2(newMark);
         props.onUpdate(task);
     };
+    const updateMark3 = async (e) => {
+        clearTimeout(timer);
+        const newMark = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {mark3: newMark});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.mark3 = newMark;
+        setMark3(newMark);
+        props.onUpdate(task);
+    };
 
     const updateWidth = async (e) => {
         clearTimeout(timer);
@@ -306,6 +354,36 @@ const TaskModal = (props) => {
 
         task.width = newWidth;
         setWidth(newWidth);
+        props.onUpdate(task);
+    };
+    const updateWidth2 = async (e) => {
+        clearTimeout(timer);
+        const newWidth = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {width2: newWidth});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.width2 = newWidth;
+        setWidth2(newWidth);
+        props.onUpdate(task);
+    };
+    const updateWidth3 = async (e) => {
+        clearTimeout(timer);
+        const newWidth = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {width3: newWidth});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.width3 = newWidth;
+        setWidth3(newWidth);
         props.onUpdate(task);
     };
 
@@ -324,6 +402,36 @@ const TaskModal = (props) => {
         setHeight(newHeight);
         props.onUpdate(task);
     };
+    const updateHeight2 = async (e) => {
+        clearTimeout(timer);
+        const newHeight = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {height2: newHeight});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.height2 = newHeight;
+        setHeight2(newHeight);
+        props.onUpdate(task);
+    };
+    const updateHeight3 = async (e) => {
+        clearTimeout(timer);
+        const newHeight = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {height3: newHeight});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.height3 = newHeight;
+        setHeight3(newHeight);
+        props.onUpdate(task);
+    };
 
     const updateCount = async (e) => {
         clearTimeout(timer);
@@ -340,9 +448,58 @@ const TaskModal = (props) => {
         setCount(newCount);
         props.onUpdate(task);
     };
+    const updateCount2 = async (e) => {
+        clearTimeout(timer);
+        const newCount = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {count2: newCount});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.count2 = newCount;
+        setCount2(newCount);
+        props.onUpdate(task);
+    };
+    const updateCount3 = async (e) => {
+        clearTimeout(timer);
+        const newCount = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {count3: newCount});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.count3 = newCount;
+        setCount3(newCount);
+        props.onUpdate(task);
+    };
+
+
+
+    const displayField2 = () => {
+        document.querySelector(".plate_2").style.display = "block"
+        document.querySelector(".addBtn").style.display = "none"
+        if (document.querySelector(".plate_2").style.display == "block") {
+            document.querySelector(".addBtn2").style.display = "block"
+        }
+    }
+    const displayField3 = () => {
+        document.querySelector(".plate_3").style.display = "block"
+    }
+    const hideField2 = () => {
+        document.querySelector(".plate_2").style.display = "none"
+    }
+    const hideField3 = () => {
+        document.querySelector(".plate_3").style.display = "none"
+    }
     return (
         <Modal
-            open={task !== undefined}
+            open={task !== undefined }
             onClose={onClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -369,6 +526,7 @@ const TaskModal = (props) => {
                             </div>
                             <div className="field_item otstup">
                                 <input
+                                    id="author"
                                     className="color"
                                     value={author}
                                     onChange={updateAuthor}
@@ -416,7 +574,10 @@ const TaskModal = (props) => {
                             </div>
                         </div>
                     </div>
+
                     <div className="mainfield">
+                        <button className="addBtn addFieldBtn" onClick={displayField2}>Добавить поле</button>
+                        <button className="addBtn2 addFieldBtn" onClick={displayField3}>Добавить поле</button>
                         <div className="fields">
                             <div className="field_list otstup">
                                 <div className="item">
@@ -457,9 +618,10 @@ const TaskModal = (props) => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         {/*1 plate*/}
-                        <div className="fields">
+                        <div className="fields plate_1">
                             <div className="field_list otstup">
                                 <div className="item">
                                     <input className="color size_1" value={name} onChange={updateName}
@@ -484,10 +646,16 @@ const TaskModal = (props) => {
                                 <div className="item">
                                     <button className="btn" onClick={downloadBase64Data}/>
                                 </div>
+                                <div className="item">
+                                    <button className="btn" >X</button>
+                                </div>
+
                             </div>
+
                         </div>
+
                         {/*2 plate*/}
-                        <div className="fields">
+                        <div className="fields plate_2">
                             <div className="field_list otstup">
                                 <div className="item">
                                     <input className="color size_1" value={name2} onChange={updateName2}
@@ -498,53 +666,61 @@ const TaskModal = (props) => {
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width2} onChange={updateWidth}
+                                    <input className="color size_2" value={width2} onChange={updateWidth2}
                                            placeholder="Ширина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height2} onChange={updateHeight}
+                                    <input className="color size_2" value={height2} onChange={updateHeight2}
                                            placeholder="Длина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count2} onChange={updateCount}
+                                    <input className="size_2 color" value={count2} onChange={updateCount2}
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
                                     <button className="btn" onClick={downloadBase64Data}></button>
+                                </div>
+                                <div className="item">
+                                    <button className="btn" onClick={hideField2}>X</button>
                                 </div>
                             </div>
                         </div>
                         {/*3 plate*/}
-                        <div className="fields">
+                        <div className="fields plate_3">
                             <div className="field_list otstup">
                                 <div className="item">
-                                    <input className="color size_1" value={name3} onChange={updateName}
+                                    <input className="color size_1" value={name3} onChange={updateName3}
                                            placeholder="Наименование"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2 otstup" value={mark3} onChange={updateMark}
+                                    <input className="color size_2 otstup" value={mark3} onChange={updateMark3}
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width3} onChange={updateWidth}
+                                    <input className="color size_2" value={width3} onChange={updateWidth3}
                                            placeholder="Ширина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height3} onChange={updateHeight}
+                                    <input className="color size_2" value={height3} onChange={updateHeight3}
                                            placeholder="Длина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count3} onChange={updateCount}
+                                    <input className="size_2 color" value={count3} onChange={updateCount3}
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
                                     <button className="btn" onClick={downloadBase64Data}></button>
                                 </div>
-                            </div>
-                            <div className="item">
-                                <div className="field_list otstup">
-                                    <img src={plan} className="img-filebase"/>
+                                <div className="item">
+                                    <button className="btn" onClick={hideField3}>X</button>
                                 </div>
+                            </div>
+
+
+                        </div>
+                        <div className="item">
+                            <div className="field_list otstup">
+                                <img src={plan} className="img-filebase"/>
                             </div>
                         </div>
                     </div>

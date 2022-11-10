@@ -69,6 +69,7 @@ const Kanban = props => {
         } catch (err) {
             alert(err)
         }
+
     }
 
     const onUpdateTask = (task) => {
@@ -87,20 +88,6 @@ const Kanban = props => {
         newData[sectionIndex].tasks.splice(taskIndex, 1)
         setData(newData)
     }
-    // const checkQuickly = () => {
-    //     if (quickly === true) {
-    //     document.getElementById('board-section').style.background = "red"
-    //     }
-    //     let status
-    //     for(let i = 0; i < data[0].tasks.length; i++){
-    //         status = data[0].tasks[i].quickly
-    //         console.log(status)
-    //         if (status === true) {
-    //             document.getElementById('board-section').style.background = "red"
-    //         }
-    //     }
-    // }
-    // //checkQuickly()
 
 
 
@@ -113,7 +100,7 @@ const Kanban = props => {
         console.log(status.value)
      }
     onChangeCheckBox()*/
-    console.log(selectedTask)
+
     return (
         <div className="kanban-board">
 
@@ -223,8 +210,8 @@ const Kanban = props => {
                                                                                 </a>
                                                                                 <a className="board_column">Чертёж
                                                                                     <a className="board-text">{task.planName}</a>
-                                                                                    <a className="board-text">{task.planName2}</a>
-                                                                                    <a className="board-text">{task.planName3}</a>
+                                                                                    <a className="board-text">{task.planName}</a>
+                                                                                    <a className="board-text">{task.planName}</a>
                                                                                 </a>
 
 
@@ -238,7 +225,8 @@ const Kanban = props => {
                                                                                     checked={task.quickly}
                                                                                     className="board-title"/>Срочно</a>
                                                                                 <button className='redactir'
-                                                                                        onClick={() => setSelectedTask(task)}>Редактировать
+                                                                                        onClick={() => setSelectedTask(task)
+                                                                                }>Редактировать
                                                                                 </button>
                                                                             </div>
                                                                         </div>
