@@ -24,28 +24,61 @@ const taskSchema = new Schema({
     name: {
         type: String
     },
+    name2: {
+        type: String
+    },
+    name3: {
+        type: String
+    },
     mark: {
+        type: String
+    },
+    mark2: {
+        type: String
+    },
+    mark3: {
         type: String
     },
     width: {
         type: Number
     },
+    width2: {
+        type: Number
+    },
+    width3: {
+        type: Number
+    },
     height: {
+        type: Number
+    },
+    height2: {
+        type: Number
+    },
+    height3: {
         type: Number
     },
     count: {
         type: Number,
     },
+    count2: {
+        type: Number,
+    },
+    count3: {
+        type: Number,
+    },
     planName: {
+        type: String
+    },
+    planName2: {
+        type: String
+    },
+    planName3: {
         type: String
     },
     plan: {
         type: String
     },
-    nameTwo: {
-        type: String,
-        defaultValue: "undefined"
-    },
+
     position: {
         type: Number
     }

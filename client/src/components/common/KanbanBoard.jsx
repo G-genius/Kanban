@@ -113,7 +113,7 @@ const Kanban = props => {
         console.log(status.value)
      }
     onChangeCheckBox()*/
-
+    console.log(selectedTask)
     return (
         <div className="kanban-board">
 
@@ -201,21 +201,30 @@ const Kanban = props => {
                                                                             <div className="board_table_column">
                                                                                 <a className="board_column">Наименование
                                                                                     <a className="board-text">{task.name}</a>
-                                                                                    <a className="board-text">{task.nameTwo}</a>
+                                                                                    <a className="board-text">{task.name2}</a>
+                                                                                    <a className="board-text">{task.name3}</a>
                                                                                 </a>
                                                                                 <a className="board_column">Марка
                                                                                     <a className="board-text">{task.mark}</a>
+                                                                                    <a className="board-text">{task.mark2}</a>
+                                                                                    <a className="board-text">{task.mark3}</a>
                                                                                 </a>
                                                                                 <a className="board_column">ШхД заг
                                                                                     <a className="board-text">{task.width} {task.height}</a>
+                                                                                    <a className="board-text">{task.width2} {task.height2}</a>
+                                                                                    <a className="board-text">{task.width3} {task.height3}</a>
                                                                                 </a>
 
                                                                                 <a className="board_column">Кол-во
                                                                                     <a className="board-text">{task.count}</a>
+                                                                                    <a className="board-text">{task.count2}</a>
+                                                                                    <a className="board-text">{task.count3}</a>
 
                                                                                 </a>
                                                                                 <a className="board_column">Чертёж
                                                                                     <a className="board-text">{task.planName}</a>
+                                                                                    <a className="board-text">{task.planName2}</a>
+                                                                                    <a className="board-text">{task.planName3}</a>
                                                                                 </a>
 
 

@@ -48,7 +48,7 @@ const TaskModal = (props) => {
     const [height, setHeight] = useState(0);
     const [count, setCount] = useState(0);
     //plate2
-    const [nameTwo, setNameTwo] = useState("");
+    const [name2, setName2] = useState("");
     const [mark2, setMark2] = useState("");
     const [width2, setWidth2] = useState(0);
     const [height2, setHeight2] = useState(0);
@@ -77,7 +77,7 @@ const TaskModal = (props) => {
         setHeight(props.task !== undefined ? props.task.height : "");
         setCount(props.task !== undefined ? props.task.count : "");
         //plate 2
-        setNameTwo(props.task !== undefined ? props.task.nameTwo : "");
+        setName2(props.task !== undefined ? props.task.name2 : "");
         setMark2(props.task !== undefined ? props.task.mark2 : "");
         setWidth2(props.task !== undefined ? props.task.width2 : "");
         setHeight2(props.task !== undefined ? props.task.height2 : "");
@@ -251,14 +251,14 @@ const TaskModal = (props) => {
         const newName = e.target.value;
         timer = setTimeout(async () => {
             try {
-                await taskApi.update(boardId, task.id, {nameTwo: nameTwo});
+                await taskApi.update(boardId, task.id, {name2: newName});
             } catch (err) {
                 alert(err);
             }
         }, timeout);
 
-        task.nameTwo = newName;
-        setNameTwo(newName);
+        task.name2 = newName;
+        setName2(newName);
         props.onUpdate(task);
     };
 
@@ -275,6 +275,21 @@ const TaskModal = (props) => {
 
         task.mark = newMark;
         setMark(newMark);
+        props.onUpdate(task);
+    };
+    const updateMark2 = async (e) => {
+        clearTimeout(timer);
+        const newMark = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {mark2: newMark});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.mark2 = newMark;
+        setMark2(newMark);
         props.onUpdate(task);
     };
 
@@ -467,7 +482,7 @@ const TaskModal = (props) => {
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
-                                    <button className="btn" onClick={downloadBase64Data}></button>
+                                    <button className="btn" onClick={downloadBase64Data}/>
                                 </div>
                             </div>
                         </div>
@@ -475,23 +490,23 @@ const TaskModal = (props) => {
                         <div className="fields">
                             <div className="field_list otstup">
                                 <div className="item">
-                                    <input className="color size_1" value={nameTwo} onChange={updateName2}
+                                    <input className="color size_1" value={name2} onChange={updateName2}
                                            placeholder="Наименование"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2 otstup" value={mark} onChange={updateMark}
+                                    <input className="color size_2 otstup" value={mark2} onChange={updateMark2}
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width} onChange={updateWidth}
+                                    <input className="color size_2" value={width2} onChange={updateWidth}
                                            placeholder="Ширина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height} onChange={updateHeight}
+                                    <input className="color size_2" value={height2} onChange={updateHeight}
                                            placeholder="Длина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                    <input className="size_2 color" value={count2} onChange={updateCount}
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
@@ -503,23 +518,23 @@ const TaskModal = (props) => {
                         <div className="fields">
                             <div className="field_list otstup">
                                 <div className="item">
-                                    <input className="color size_1" value={name} onChange={updateName}
+                                    <input className="color size_1" value={name3} onChange={updateName}
                                            placeholder="Наименование"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2 otstup" value={mark} onChange={updateMark}
+                                    <input className="color size_2 otstup" value={mark3} onChange={updateMark}
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width} onChange={updateWidth}
+                                    <input className="color size_2" value={width3} onChange={updateWidth}
                                            placeholder="Ширина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height} onChange={updateHeight}
+                                    <input className="color size_2" value={height3} onChange={updateHeight}
                                            placeholder="Длина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                    <input className="size_2 color" value={count3} onChange={updateCount}
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
