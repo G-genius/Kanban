@@ -2,7 +2,6 @@ import {Box, Typography, Divider, TextField, IconButton, Card} from '@mui/materi
 import {useEffect, useState} from 'react'
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-import sectionApi from '../../api/sectionApi'
 import taskApi from '../../api/taskApi'
 import TaskModal from './TaskModal'
 import '../../css/Main.css';
@@ -57,6 +56,7 @@ const Kanban = props => {
             alert(err)
         }
     }
+
 
     const createTask = async (sectionId) => {
         try {
@@ -116,13 +116,15 @@ const Kanban = props => {
 
     return (
         <div className="kanban-board">
+
             <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
             }}>
-
             </Box>
+
+
             <Divider sx={{margin: '10px 0'}}/>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Box sx={{
@@ -135,6 +137,7 @@ const Kanban = props => {
                         data.map(section => (
 
                             <div key={section.id} style={{width: '600px'}}>
+
                                 <Droppable key={section.id} droppableId={section.id}>
                                     {(provided) => (
                                         <Box
@@ -198,10 +201,10 @@ const Kanban = props => {
                                                                             <div className="board_table_column">
                                                                                 <a className="board_column">Наименование
                                                                                     <a className="board-text">{task.name}</a>
+                                                                                    <a className="board-text">{task.nameTwo}</a>
                                                                                 </a>
                                                                                 <a className="board_column">Марка
                                                                                     <a className="board-text">{task.mark}</a>
-
                                                                                 </a>
                                                                                 <a className="board_column">ШхД заг
                                                                                     <a className="board-text">{task.width} {task.height}</a>

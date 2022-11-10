@@ -41,11 +41,24 @@ const TaskModal = (props) => {
     const [date, setDate] = useState();
     const [client, setClient] = useState("");
     const [quickly, setQuickly] = useState(false);
+    //plate 1
     const [name, setName] = useState("");
     const [mark, setMark] = useState("");
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [count, setCount] = useState(0);
+    //plate2
+    const [nameTwo, setNameTwo] = useState("");
+    const [mark2, setMark2] = useState("");
+    const [width2, setWidth2] = useState(0);
+    const [height2, setHeight2] = useState(0);
+    const [count2, setCount2] = useState(0);
+    //plate3
+    const [name3, setName3] = useState("");
+    const [mark3, setMark3] = useState("");
+    const [width3, setWidth3] = useState(0);
+    const [height3, setHeight3] = useState(0);
+    const [count3, setCount3] = useState(0);
     const [plan, setPlan] = useState("");
     const [planName, setPlanName] = useState("");
     const [currentDate, setCurrentDate] = useState(0)
@@ -57,11 +70,25 @@ const TaskModal = (props) => {
         setDate(props.task !== undefined ? props.task.date : "");
         setClient(props.task !== undefined ? props.task.client : "");
         setQuickly(props.task !== undefined ? props.task.quickly : "");
+        //plate 1
         setName(props.task !== undefined ? props.task.name : "");
         setMark(props.task !== undefined ? props.task.mark : "");
         setWidth(props.task !== undefined ? props.task.width : "");
         setHeight(props.task !== undefined ? props.task.height : "");
         setCount(props.task !== undefined ? props.task.count : "");
+        //plate 2
+        setNameTwo(props.task !== undefined ? props.task.nameTwo : "");
+        setMark2(props.task !== undefined ? props.task.mark2 : "");
+        setWidth2(props.task !== undefined ? props.task.width2 : "");
+        setHeight2(props.task !== undefined ? props.task.height2 : "");
+        setCount2(props.task !== undefined ? props.task.count2 : "");
+        //plate 3
+        setName3(props.task !== undefined ? props.task.name3 : "");
+        setMark3(props.task !== undefined ? props.task.mark3 : "");
+        setWidth3(props.task !== undefined ? props.task.width3 : "");
+        setHeight3(props.task !== undefined ? props.task.height3 : "");
+        setCount3(props.task !== undefined ? props.task.count3 : "");
+
         setPlan(props.task !== undefined ? props.task.plan : "");
         setPlanName(props.task !== undefined ? props.task.planName : "");
 
@@ -81,7 +108,6 @@ const TaskModal = (props) => {
             }
         }, timeout);
     };
-
 
 
     const deleteTask = async () => {
@@ -110,209 +136,195 @@ const TaskModal = (props) => {
     };
 
 
-const updateClient = async (e) => {
-    clearTimeout(timer);
-    const newClient = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {client: newClient});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.client = newClient;
-    setClient(newClient);
-    props.onUpdate(task);
-};
-
-const updateName = async (e) => {
-    clearTimeout(timer);
-    const newName = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {name: newName});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.name = newName;
-    setName(newName);
-    props.onUpdate(task);
-};
-
-const updateMark = async (e) => {
-    clearTimeout(timer);
-    const newMark = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {mark: newMark});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.mark = newMark;
-    setMark(newMark);
-    props.onUpdate(task);
-};
-
-const updateWidth = async (e) => {
-    clearTimeout(timer);
-    const newWidth = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {width: newWidth});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.width = newWidth;
-    setWidth(newWidth);
-    props.onUpdate(task);
-};
-
-const updateHeight = async (e) => {
-    clearTimeout(timer);
-    const newHeight = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {height: newHeight});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.height = newHeight;
-    setHeight(newHeight);
-    props.onUpdate(task);
-};
-
-const updateCount = async (e) => {
-    clearTimeout(timer);
-    const newCount = e.target.value;
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {count: newCount});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.count = newCount;
-    setCount(newCount);
-    props.onUpdate(task);
-};
-
-const updatePlan = async (base64) => {
-    clearTimeout(timer);
-    // const newPlan = e.target.value
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {
-                plan: base64.base64,
-                planName: base64.name,
-            });
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-
-    task.plan = base64.base64;
-    task.planName = base64.name;
-    setPlan(base64.base64);
-    setPlanName(base64.name);
-    props.onUpdate(base64.base64);
-    console.log(base64);
-    console.log(task.plan);
-};
-
-const downloadBase64Data = () => {
-    saveAs(task.plan);
-    console.log(task.plan);
-};
-
-const updateQiuckly = async (e) => {
-    let isChecked = document.getElementById("one").checked;
-
-    timer = setTimeout(async () => {
-        try {
-            if (isChecked === true) {
-                await taskApi.update(boardId, task.id, {quickly: isChecked});
-                //document.getElementById('board-section').style.background = "red"
-            } else if (isChecked === false) {
-                await taskApi.update(boardId, task.id, {quickly: isChecked});
-                //document.getElementById('board-section').style.background = "#B6B2B2"
+    const updateClient = async (e) => {
+        clearTimeout(timer);
+        const newClient = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {client: newClient});
+            } catch (err) {
+                alert(err);
             }
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
-    task.quickly = isChecked;
-    setQuickly(isChecked);
-    props.onUpdate(task);
+        }, timeout);
 
-    // clearTimeout(timer)
-    // const newQuickly = e.target.value
-    // timer = setTimeout(async () => {
-    //     try {
-    //         await taskApi.update(boardId, task.id, {plan: newQuickly})
-    //     } catch (err) {
-    //         alert(err)
-    //     }
-    // }, timeout)
-    //
-};
+        task.client = newClient;
+        setClient(newClient);
+        props.onUpdate(task);
+    };
 
-let currentTime = new Date().toLocaleString("ru-RU",)
-let lastDate = setInterval(
-    function () {
-        let newDate = new Date().toLocaleString("ru-RU",)
-        setCurrentDate(newDate)
-    }, 1000);
-    console.log(currentTime)
+
+    const updatePlan = async (base64) => {
+        clearTimeout(timer);
+        // const newPlan = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {
+                    plan: base64.base64,
+                    planName: base64.name,
+                });
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.plan = base64.base64;
+        task.planName = base64.name;
+        setPlan(base64.base64);
+        setPlanName(base64.name);
+        props.onUpdate(base64.base64);
+        console.log(base64);
+        console.log(task.plan);
+    };
+
+    const downloadBase64Data = () => {
+        saveAs(task.plan);
+        console.log(task.plan);
+    };
+
+    const updateQiuckly = async (e) => {
+        let isChecked = document.getElementById("one").checked;
+
+        timer = setTimeout(async () => {
+            try {
+                if (isChecked === true) {
+                    await taskApi.update(boardId, task.id, {quickly: isChecked});
+                    //document.getElementById('board-section').style.background = "red"
+                } else if (isChecked === false) {
+                    await taskApi.update(boardId, task.id, {quickly: isChecked});
+                    //document.getElementById('board-section').style.background = "#B6B2B2"
+                }
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+        task.quickly = isChecked;
+        setQuickly(isChecked);
+        props.onUpdate(task);
+    };
+
+    let currentTime = new Date().toLocaleString("ru-RU",)
+    let lastDate = setInterval(
+        function () {
+            let newDate = new Date().toLocaleString("ru-RU",)
+            setCurrentDate(newDate)
+        }, 1000);
     clearInterval(lastDate)
+    const onClose = () => {
+        isModalClosed = true;
+        props.onUpdate(task);
+        props.onClose();
+    };
+    const onSave = () => {
+        isModalClosed = true;
+        props.onUpdate(task);
+        props.onClose();
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {date: currentTime});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
 
+        task.date = currentTime;
+        setDate(currentTime);
+        props.onUpdate(currentTime);
+    }
+    // clearInterval(lastDate)
+    const updateName = async (e) => {
+        clearTimeout(timer);
+        const newName = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name: newName});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
 
-const updateDate = async (e) => {
-    clearTimeout(timer);
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {date: currentTime});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
+        task.name = newName;
+        setName(newName);
+        props.onUpdate(task);
+    };
+    const updateName2 = async (e) => {
+        clearTimeout(timer);
+        const newName = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {nameTwo: nameTwo});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
 
-    task.date = currentTime;
-    setDate(currentTime);
-    props.onUpdate(currentTime);
-};
-let newDate = currentTime
-	const onClose = () => {
-		isModalClosed = true;
-		props.onUpdate(task);
-		props.onClose();
-	};
-const onSave = () => {
-    isModalClosed = true;
-    props.onUpdate(task);
-    props.onClose();
-    timer = setTimeout(async () => {
-        try {
-            await taskApi.update(boardId, task.id, {date: currentTime});
-        } catch (err) {
-            alert(err);
-        }
-    }, timeout);
+        task.nameTwo = newName;
+        setNameTwo(newName);
+        props.onUpdate(task);
+    };
 
-    task.date = currentTime;
-    setDate(currentTime);
-    props.onUpdate(currentTime);
-}
-	// clearInterval(lastDate)
+    const updateMark = async (e) => {
+        clearTimeout(timer);
+        const newMark = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {mark: newMark});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.mark = newMark;
+        setMark(newMark);
+        props.onUpdate(task);
+    };
+
+    const updateWidth = async (e) => {
+        clearTimeout(timer);
+        const newWidth = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {width: newWidth});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.width = newWidth;
+        setWidth(newWidth);
+        props.onUpdate(task);
+    };
+
+    const updateHeight = async (e) => {
+        clearTimeout(timer);
+        const newHeight = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {height: newHeight});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.height = newHeight;
+        setHeight(newHeight);
+        props.onUpdate(task);
+    };
+
+    const updateCount = async (e) => {
+        clearTimeout(timer);
+        const newCount = e.target.value;
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {count: newCount});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.count = newCount;
+        setCount(newCount);
+        props.onUpdate(task);
+    };
     return (
         <Modal
             open={task !== undefined}
@@ -355,9 +367,6 @@ const onSave = () => {
                             </div>
                             <div className="field_item otstup">
                                 <p className="color color_1">{currentTime}</p>
-                                    
-
-
                             </div>
                         </div>
                     </div>
@@ -386,7 +395,7 @@ const onSave = () => {
                                         value={quickly}
                                     />
                                 </div>
-                                    <div className="field_item">
+                                <div className="field_item">
                                     <label className="labelCh">Срочно</label>
                                 </div>
                             </div>
@@ -434,47 +443,84 @@ const onSave = () => {
                                 </div>
                             </div>
                         </div>
+                        {/*1 plate*/}
                         <div className="fields">
                             <div className="field_list otstup">
                                 <div className="item">
-                                    <input
-                                        className="color size_1"
-                                        value={name}
-                                        onChange={updateName}
-                                        placeholder="Наименование"
-                                    />
+                                    <input className="color size_1" value={name} onChange={updateName}
+                                           placeholder="Наименование"/>
                                 </div>
                                 <div className="item">
-                                    <input
-                                        className="color size_2 otstup"
-                                        value={mark}
-                                        onChange={updateMark}
-                                        placeholder="Марка"
-                                    />
+                                    <input className="color size_2 otstup" value={mark} onChange={updateMark}
+                                           placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input
-                                        className="color size_2"
-                                        value={width}
-                                        onChange={updateWidth}
-                                        placeholder="Ширина заготовки"
-                                    />
+                                    <input className="color size_2" value={width} onChange={updateWidth}
+                                           placeholder="Ширина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input
-                                        className="color size_2"
-                                        value={height}
-                                        onChange={updateHeight}
-                                        placeholder="Длина заготовки"
-                                    />
+                                    <input className="color size_2" value={height} onChange={updateHeight}
+                                           placeholder="Длина заготовки"/>
                                 </div>
                                 <div className="item">
-                                    <input
-                                        className="size_2 color"
-                                        value={count}
-                                        onChange={updateCount}
-                                        placeholder="Кол-во"
-                                    />
+                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                           placeholder="Кол-во"/>
+                                </div>
+                                <div className="item">
+                                    <button className="btn" onClick={downloadBase64Data}></button>
+                                </div>
+                            </div>
+                        </div>
+                        {/*2 plate*/}
+                        <div className="fields">
+                            <div className="field_list otstup">
+                                <div className="item">
+                                    <input className="color size_1" value={nameTwo} onChange={updateName2}
+                                           placeholder="Наименование"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2 otstup" value={mark} onChange={updateMark}
+                                           placeholder="Марка"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2" value={width} onChange={updateWidth}
+                                           placeholder="Ширина заготовки"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2" value={height} onChange={updateHeight}
+                                           placeholder="Длина заготовки"/>
+                                </div>
+                                <div className="item">
+                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                           placeholder="Кол-во"/>
+                                </div>
+                                <div className="item">
+                                    <button className="btn" onClick={downloadBase64Data}></button>
+                                </div>
+                            </div>
+                        </div>
+                        {/*3 plate*/}
+                        <div className="fields">
+                            <div className="field_list otstup">
+                                <div className="item">
+                                    <input className="color size_1" value={name} onChange={updateName}
+                                           placeholder="Наименование"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2 otstup" value={mark} onChange={updateMark}
+                                           placeholder="Марка"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2" value={width} onChange={updateWidth}
+                                           placeholder="Ширина заготовки"/>
+                                </div>
+                                <div className="item">
+                                    <input className="color size_2" value={height} onChange={updateHeight}
+                                           placeholder="Длина заготовки"/>
+                                </div>
+                                <div className="item">
+                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                           placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
                                     <button className="btn" onClick={downloadBase64Data}></button>
@@ -487,18 +533,11 @@ const onSave = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/*<TextField*/}
-                    {/*    value={plan}*/}
-                    {/*    onChange={updatePlan}*/}
-                    {/*    placeholder='Чертёж'*/}
-                    {/*/>*/}
-
                     <div className="buttons-icons">
                         <div className="buttons-bottom">
                             <div className="delete-btn">
                                 <button className="btn btn_low"
-                                    onClick={deleteTask}
+                                        onClick={deleteTask}
                                 >
                                     Удалить карточку
                                 </button>

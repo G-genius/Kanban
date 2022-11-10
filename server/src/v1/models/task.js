@@ -10,7 +10,7 @@ const taskSchema = new Schema({
     },
     author: {
         type: String
-    }, //currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + "  " + currentTime
+    },
     date: {
         type: String
     },
@@ -20,6 +20,31 @@ const taskSchema = new Schema({
     quickly: {
         type: Boolean,
         default: false
+    },
+    name: {
+        type: String
+    },
+    mark: {
+        type: String
+    },
+    width: {
+        type: Number
+    },
+    height: {
+        type: Number
+    },
+    count: {
+        type: Number,
+    },
+    planName: {
+        type: String
+    },
+    plan: {
+        type: String
+    },
+    nameTwo: {
+        type: String,
+        defaultValue: "undefined"
     },
     position: {
         type: Number

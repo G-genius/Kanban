@@ -33,9 +33,18 @@ const Kanban = props => {
 
     }
     getId()
+    const createSection = async () => {
+        try {
+            const section = await sectionApi.create(boardId)
+            setData([...data, section])
+        } catch (err) {
+            alert(err)
+        }
+    }
     console.log(sectionId)
     return (
         <div>
+            <button onClick={createSection}>Create</button>
             <Home/>
         </div>
     )
