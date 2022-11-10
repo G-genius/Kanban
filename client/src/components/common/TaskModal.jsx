@@ -107,7 +107,15 @@ const TaskModal = (props) => {
             }
 
         }, timeout);
+        setTimeout(() => {
+            for ( let i = 0; i < 1000; i++ ) {
+                document.querySelector(".addFieldBtn").click();
+            }
+            for ( let i = 0; i < 1000; i++ ) {
+                document.querySelector(".addBtn2").click();
+            }
 
+        },1000)
     };
 
 
@@ -132,6 +140,7 @@ const TaskModal = (props) => {
                 alert(err);
             }
         }, timeout);
+
 
         task.author = newAuthor;
         setAuthor(newAuthor);
@@ -491,10 +500,46 @@ const TaskModal = (props) => {
     const displayField3 = () => {
         document.querySelector(".plate_3").style.display = "block"
     }
+    const hideField = () => {
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name: ""});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.name = "";
+        setName("");
+        props.onUpdate(task);
+        document.querySelector(".plate_1").style.display = "none"
+    }
     const hideField2 = () => {
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name2: ""});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.name2 = "";
+        setName2("");
+        props.onUpdate(task);
         document.querySelector(".plate_2").style.display = "none"
     }
     const hideField3 = () => {
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {name3: ""});
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.name3 = "";
+        setName3("");
+        props.onUpdate(task);
         document.querySelector(".plate_3").style.display = "none"
     }
     return (
@@ -647,7 +692,7 @@ const TaskModal = (props) => {
                                     <button className="btn" onClick={downloadBase64Data}/>
                                 </div>
                                 <div className="item">
-                                    <button className="btn" >X</button>
+                                    <button className="btn" onClick={hideField} >X</button>
                                 </div>
 
                             </div>
