@@ -60,13 +60,14 @@ input {
 }
 
 .img-filebase {
+	position: fixed;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 359px;
+	width: 259px;
 	height: 181px;
 	object-fit: scale-down;
 	border: 2px solid black;
-	margin-top: -150px;
-	margin-left: 700px;
+	left: 750px;
+	bottom: 100px;
 }

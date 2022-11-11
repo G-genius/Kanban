@@ -491,11 +491,10 @@ const TaskModal = (props) => {
 
 
     const displayField2 = () => {
+        document.querySelector(".plate_1").style.display = "block"
         document.querySelector(".plate_2").style.display = "block"
+        document.querySelector(".plate_3").style.display = "block"
         document.querySelector(".addBtn").style.display = "none"
-        if (document.querySelector(".plate_2").style.display == "block") {
-            document.querySelector(".addBtn2").style.display = "block"
-        }
     }
     const displayField3 = () => {
         document.querySelector(".plate_3").style.display = "block"
@@ -513,6 +512,9 @@ const TaskModal = (props) => {
         setName("");
         props.onUpdate(task);
         document.querySelector(".plate_1").style.display = "none"
+        if (document.querySelector(".plate_1").style.display = "none") {
+            document.querySelector(".addBtn").style.display = "block"
+        }
     }
     const hideField2 = () => {
         timer = setTimeout(async () => {
@@ -527,6 +529,9 @@ const TaskModal = (props) => {
         setName2("");
         props.onUpdate(task);
         document.querySelector(".plate_2").style.display = "none"
+        if (document.querySelector(".plate_2").style.display = "none") {
+            document.querySelector(".addBtn").style.display = "block"
+        }
     }
     const hideField3 = () => {
         timer = setTimeout(async () => {
@@ -541,6 +546,9 @@ const TaskModal = (props) => {
         setName3("");
         props.onUpdate(task);
         document.querySelector(".plate_3").style.display = "none"
+        if (document.querySelector(".plate_3").style.display = "none") {
+            document.querySelector(".addBtn").style.display = "block"
+        }
     }
     return (
         <Modal
@@ -621,8 +629,7 @@ const TaskModal = (props) => {
                     </div>
 
                     <div className="mainfield">
-                        <button className="addBtn addFieldBtn" onClick={displayField2}>Добавить поле</button>
-                        <button className="addBtn2 addFieldBtn" onClick={displayField3}>Добавить поле</button>
+                        <button className="addBtn addFieldBtn" onClick={displayField2}>Добавить поля</button>
                         <div className="fields">
                             <div className="field_list otstup">
                                 <div className="item">
