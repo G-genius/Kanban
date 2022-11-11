@@ -67,8 +67,12 @@
 	margin-top: -10px;
 	margin-left: 80px;
 }
-.input-file1, .input-file2, .input-file3, .imgView1, .imgView2, .imgView3{
+.input-file1, .input-file2, .input-file3{
 	display: none;
+}
+.imgView1, .imgView2, .imgView3 {
+	display: none;
+	cursor: help;
 }
 .addFieldBtn {
 	width: auto;
@@ -80,4 +84,12 @@
 .addBtn {
 	display: none;
 }
-
+.fancyBoxImg1, .fancyBoxImg2, .fancyBoxImg3 {
+	display: none;
+	position: relative;
+	width: 1100px;
+	height: 900px;
+	right: 20px;
+	bottom: 650px;
+	cursor: pointer;
+}

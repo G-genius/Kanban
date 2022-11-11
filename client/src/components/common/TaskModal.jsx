@@ -23,7 +23,7 @@ const modalStyle = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "70%",
+    width: "1000px",
     bgcolor: "#B6B2B2",
     border: "0px solid #000",
     boxShadow: 24,
@@ -628,6 +628,24 @@ const TaskModal = (props) => {
             document.querySelector(".addBtn").style.display = "block"
         }
     }
+
+    const fancyBox1 = async () => {
+        let fancyBoxImg1 = document.querySelector(".fancyBoxImg1")
+        fancyBoxImg1.style.display = "block"
+    }
+    const fancyBox2 = async () => {
+        let fancyBoxImg2 = document.querySelector(".fancyBoxImg2")
+        fancyBoxImg2.style.display = "block"
+    }
+    const fancyBox3 = async () => {
+        let fancyBoxImg3 = document.querySelector(".fancyBoxImg3")
+        fancyBoxImg3.style.display = "block"
+    }
+    const onCloseFancyBox = () => {
+        document.querySelector(".fancyBoxImg1").style.display = "none"
+        document.querySelector(".fancyBoxImg2").style.display = "none"
+        document.querySelector(".fancyBoxImg3").style.display = "none"
+    }
     return (
         <Modal
             open={task !== undefined }
@@ -637,7 +655,9 @@ const TaskModal = (props) => {
             BackdropProps={{timeout: 500}}
         >
             <Fade in={task !== undefined}>
-                <Box sx={modalStyle} className="board-item">
+                <Box sx={modalStyle} className="board-item"
+
+                >
                     <Box
                         sx={{
                             display: "flex",
@@ -857,13 +877,13 @@ const TaskModal = (props) => {
                         </div>
                         <div className="item">
                             <div className="field_list otstup imgView1">
-                                <img src={plan} className="img-filebase"/>
+                                <img src={plan} onClick={fancyBox1} className="img-filebase fancyBox1"/>
                             </div>
                             <div className="field_list otstup imgView2">
-                                <img src={plan2} className="img-filebase"/>
+                                <img src={plan2} onClick={fancyBox2} className="img-filebase fancyBox2"/>
                             </div>
                             <div className="field_list otstup imgView3">
-                                <img src={plan3} className="img-filebase"/>
+                                <img src={plan3} onClick={fancyBox3} className="img-filebase fancyBox3"/>
                             </div>
                         </div>
                     </div>
@@ -884,8 +904,15 @@ const TaskModal = (props) => {
                             </div>
                         </div>
                     </div>
+                    <div className="fancyBox" onClick={onCloseFancyBox}>
+                        <img src={plan} className="fancyBoxImg1"/>
+                        <img src={plan2} className="fancyBoxImg2"/>
+                        <img src={plan3} className="fancyBoxImg3"/>
+                    </div>
                 </Box>
+
             </Fade>
+
         </Modal>
     );
 };
