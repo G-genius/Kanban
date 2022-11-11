@@ -78,6 +78,12 @@ const taskSchema = new Schema({
     plan: {
         type: String
     },
+    plan2: {
+        type: String
+    },
+    plan3: {
+        type: String
+    },
 
     position: {
         type: Number

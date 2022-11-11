@@ -210,8 +210,8 @@ const Kanban = props => {
                                                                                 </a>
                                                                                 <a className="board_column">Чертёж
                                                                                     <a className="board-text">{task.planName}</a>
-                                                                                    <a className="board-text">{task.planName}</a>
-                                                                                    <a className="board-text">{task.planName}</a>
+                                                                                    <a className="board-text">{task.planName2}</a>
+                                                                                    <a className="board-text">{task.planName3}</a>
                                                                                 </a>
 
 

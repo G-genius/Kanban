@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 import taskApi from "../../api/taskApi";
 import FileBase64 from "react-filebase64";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import {saveAs} from "file-saver";
 import "../../css/style.css";
 import "../../css/TaskModal.css";
@@ -41,26 +42,35 @@ const TaskModal = (props) => {
     const [date, setDate] = useState();
     const [client, setClient] = useState("");
     const [quickly, setQuickly] = useState(false);
+    const [plan, setPlan] = useState("");
+
     //plate 1
     const [name, setName] = useState("");
     const [mark, setMark] = useState("");
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [count, setCount] = useState(0);
+    const [plan2, setPlan2] = useState("");
+    const [planName, setPlanName] = useState("");
+
     //plate2
     const [name2, setName2] = useState("");
     const [mark2, setMark2] = useState("");
     const [width2, setWidth2] = useState(0);
     const [height2, setHeight2] = useState(0);
     const [count2, setCount2] = useState(0);
+    const [planName2, setPlanName2] = useState("");
     //plate3
     const [name3, setName3] = useState("");
     const [mark3, setMark3] = useState("");
     const [width3, setWidth3] = useState(0);
     const [height3, setHeight3] = useState(0);
     const [count3, setCount3] = useState(0);
-    const [plan, setPlan] = useState("");
-    const [planName, setPlanName] = useState("");
+    const [plan3, setPlan3] = useState("");
+    const [planName3, setPlanName3] = useState("");
+
+
+
     const [currentDate, setCurrentDate] = useState(0)
     const editorWrapperRef = useRef();
 
@@ -76,21 +86,26 @@ const TaskModal = (props) => {
         setWidth(props.task !== undefined ? props.task.width : "");
         setHeight(props.task !== undefined ? props.task.height : "");
         setCount(props.task !== undefined ? props.task.count : "");
+        setPlan(props.task !== undefined ? props.task.plan : "");
+        setPlanName(props.task !== undefined ? props.task.planName : "");
         //plate 2
         setName2(props.task !== undefined ? props.task.name2 : "");
         setMark2(props.task !== undefined ? props.task.mark2 : "");
         setWidth2(props.task !== undefined ? props.task.width2 : "");
         setHeight2(props.task !== undefined ? props.task.height2 : "");
         setCount2(props.task !== undefined ? props.task.count2 : "");
+        setPlan2(props.task !== undefined ? props.task.plan2 : "");
+        setPlanName2(props.task !== undefined ? props.task.planName2 : "");
         //plate 3
         setName3(props.task !== undefined ? props.task.name3 : "");
         setMark3(props.task !== undefined ? props.task.mark3 : "");
         setWidth3(props.task !== undefined ? props.task.width3 : "");
         setHeight3(props.task !== undefined ? props.task.height3 : "");
         setCount3(props.task !== undefined ? props.task.count3 : "");
+        setPlan3(props.task !== undefined ? props.task.plan3 : "");
+        setPlanName3(props.task !== undefined ? props.task.planName3 : "");
 
-        setPlan(props.task !== undefined ? props.task.plan : "");
-        setPlanName(props.task !== undefined ? props.task.planName : "");
+
 
         if (props.task !== undefined) {
             isModalClosed = false;
@@ -179,7 +194,7 @@ const TaskModal = (props) => {
     };
 
 
-    const updatePlan = async (base64) => {
+    const updatePlan1 = async (base64) => {
         clearTimeout(timer);
         // const newPlan = e.target.value
         timer = setTimeout(async () => {
@@ -198,13 +213,56 @@ const TaskModal = (props) => {
         setPlan(base64.base64);
         setPlanName(base64.name);
         props.onUpdate(base64.base64);
-        console.log(base64);
-        console.log(task.plan);
+    };
+    const updatePlan2 = async (base64) => {
+        clearTimeout(timer);
+        // const newPlan = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {
+                    plan2: base64.base64,
+                    planName2: base64.name,
+                });
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.plan2 = base64.base64;
+        task.planName2 = base64.name;
+        setPlan2(base64.base64);
+        setPlanName2(base64.name);
+        props.onUpdate(base64.base64);
+    };
+    const updatePlan3 = async (base64) => {
+        clearTimeout(timer);
+        // const newPlan = e.target.value
+        timer = setTimeout(async () => {
+            try {
+                await taskApi.update(boardId, task.id, {
+                    plan3: base64.base64,
+                    planName3: base64.name,
+                });
+            } catch (err) {
+                alert(err);
+            }
+        }, timeout);
+
+        task.plan3 = base64.base64;
+        task.planName3 = base64.name;
+        setPlan3(base64.base64);
+        setPlanName3(base64.name);
+        props.onUpdate(base64.base64);
     };
 
     const downloadBase64Data = () => {
         saveAs(task.plan);
-        console.log(task.plan);
+    };
+    const downloadBase64Data2 = () => {
+        saveAs(task.plan2);
+    };
+    const downloadBase64Data3 = () => {
+        saveAs(task.plan3);
     };
 
     const updateQiuckly = async (e) => {
@@ -489,15 +547,35 @@ const TaskModal = (props) => {
     };
 
 
-
     const displayField2 = () => {
         document.querySelector(".plate_1").style.display = "block"
         document.querySelector(".plate_2").style.display = "block"
         document.querySelector(".plate_3").style.display = "block"
         document.querySelector(".addBtn").style.display = "none"
     }
-    const displayField3 = () => {
-        document.querySelector(".plate_3").style.display = "block"
+    const loadBtn = () => {
+        document.querySelector(".input-file1").style.display = "block"
+        document.querySelector(".input-file2").style.display = "none"
+        document.querySelector(".input-file3").style.display = "none"
+        document.querySelector(".imgView1").style.display = "block"
+        document.querySelector(".imgView2").style.display = "none"
+        document.querySelector(".imgView3").style.display = "none"
+    }
+    const loadBtn2 = () => {
+        document.querySelector(".input-file2").style.display = "block"
+        document.querySelector(".input-file1").style.display = "none"
+        document.querySelector(".input-file3").style.display = "none"
+        document.querySelector(".imgView2").style.display = "block"
+        document.querySelector(".imgView1").style.display = "none"
+        document.querySelector(".imgView3").style.display = "none"
+    }
+    const loadBtn3 = () => {
+        document.querySelector(".input-file3").style.display = "block"
+        document.querySelector(".input-file2").style.display = "none"
+        document.querySelector(".input-file1").style.display = "none"
+        document.querySelector(".imgView3").style.display = "block"
+        document.querySelector(".imgView2").style.display = "none"
+        document.querySelector(".imgView1").style.display = "none"
     }
     const hideField = () => {
         timer = setTimeout(async () => {
@@ -665,15 +743,20 @@ const TaskModal = (props) => {
                                     </div>
                                 </div>
                                 <div className="field_list otstup">
-                                    <div className="item btn_up">
-                                        <FileBase64 multiple={false} onDone={updatePlan}/>
+                                    <div className="input-file1">
+                                        <FileBase64 multiple={false} className="btn" onDone={updatePlan1}/>
+                                    </div>
+                                    <div className="input-file2">
+                                        <FileBase64 multiple={false} className="btn" onDone={updatePlan2}/>
+                                    </div>
+                                    <div className="input-file3">
+                                        <FileBase64 multiple={false} className="btn" onDone={updatePlan3}/>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         {/*1 plate*/}
-                        <div className="fields plate_1">
+                        <div className="fields plate_1" onClick={loadBtn}>
                             <div className="field_list otstup">
                                 <div className="item">
                                     <input className="color size_1" value={name} onChange={updateName}
@@ -684,22 +767,23 @@ const TaskModal = (props) => {
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width} onChange={updateWidth}
-                                           placeholder="Ширина заготовки"/>
+                                    <input className="color size_2" value={width} type="number" onChange={updateWidth}
+                                           placeholder="Ширина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height} onChange={updateHeight}
-                                           placeholder="Длина заготовки"/>
+                                    <input className="color size_2" value={height} type="number" onChange={updateHeight}
+                                           placeholder="Длина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count} onChange={updateCount}
+                                    <input className="size_2 color" value={count} type="number" onChange={updateCount}
                                            placeholder="Кол-во"/>
                                 </div>
-                                <div className="item">
-                                    <button className="btn" onClick={downloadBase64Data}/>
+                                <div className="item loadBtn">
+                                    <button className="btn" onClick={downloadBase64Data}><ArrowDownwardIcon/></button>
                                 </div>
+
                                 <div className="item">
-                                    <button className="btn" onClick={hideField} >X</button>
+                                    <button className="btn" onClick={hideField} ><CloseIcon/></button>
                                 </div>
 
                             </div>
@@ -707,7 +791,7 @@ const TaskModal = (props) => {
                         </div>
 
                         {/*2 plate*/}
-                        <div className="fields plate_2">
+                        <div className="fields plate_2" onClick={loadBtn2}>
                             <div className="field_list otstup">
                                 <div className="item">
                                     <input className="color size_1" value={name2} onChange={updateName2}
@@ -718,27 +802,28 @@ const TaskModal = (props) => {
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width2} onChange={updateWidth2}
-                                           placeholder="Ширина заготовки"/>
+                                    <input className="color size_2" value={width2} type="number" onChange={updateWidth2}
+                                           placeholder="Ширина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height2} onChange={updateHeight2}
-                                           placeholder="Длина заготовки"/>
+                                    <input className="color size_2" value={height2} type="number" onChange={updateHeight2}
+                                           placeholder="Длина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count2} onChange={updateCount2}
+                                    <input className="size_2 color" value={count2} type="number" onChange={updateCount2}
                                            placeholder="Кол-во"/>
                                 </div>
+
                                 <div className="item">
-                                    <button className="btn" onClick={downloadBase64Data}></button>
+                                    <button className="btn" onClick={downloadBase64Data2}><ArrowDownwardIcon/></button>
                                 </div>
                                 <div className="item">
-                                    <button className="btn" onClick={hideField2}>X</button>
+                                    <button className="btn" onClick={hideField2}><CloseIcon/></button>
                                 </div>
                             </div>
                         </div>
                         {/*3 plate*/}
-                        <div className="fields plate_3">
+                        <div className="fields plate_3" onClick={loadBtn3}>
                             <div className="field_list otstup">
                                 <div className="item">
                                     <input className="color size_1" value={name3} onChange={updateName3}
@@ -749,30 +834,36 @@ const TaskModal = (props) => {
                                            placeholder="Марка"/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={width3} onChange={updateWidth3}
-                                           placeholder="Ширина заготовки"/>
+                                    <input className="color size_2" value={width3} type="number" onChange={updateWidth3}
+                                           placeholder="Ширина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="color size_2" value={height3} onChange={updateHeight3}
-                                           placeholder="Длина заготовки"/>
+                                    <input className="color size_2" value={height3} type="number" onChange={updateHeight3}
+                                           placeholder="Длина "/>
                                 </div>
                                 <div className="item">
-                                    <input className="size_2 color" value={count3} onChange={updateCount3}
+                                    <input className="size_2 color" value={count3} type="number" onChange={updateCount3}
                                            placeholder="Кол-во"/>
                                 </div>
                                 <div className="item">
-                                    <button className="btn" onClick={downloadBase64Data}></button>
+                                    <button className="btn" onClick={downloadBase64Data3}><ArrowDownwardIcon/></button>
                                 </div>
                                 <div className="item">
-                                    <button className="btn" onClick={hideField3}>X</button>
+                                    <button className="btn" onClick={hideField3}><CloseIcon/></button>
                                 </div>
                             </div>
 
 
                         </div>
                         <div className="item">
-                            <div className="field_list otstup">
+                            <div className="field_list otstup imgView1">
                                 <img src={plan} className="img-filebase"/>
+                            </div>
+                            <div className="field_list otstup imgView2">
+                                <img src={plan2} className="img-filebase"/>
+                            </div>
+                            <div className="field_list otstup imgView3">
+                                <img src={plan3} className="img-filebase"/>
                             </div>
                         </div>
                     </div>
